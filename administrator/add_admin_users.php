@@ -7,7 +7,7 @@
 <?php include_once 'side_navigation.php';?>
 <?php  if (!isset($_POST['submit']))  {
             echo "";
-        } else  {
+        } else  { 
 
             $admin_name = $_POST['admin_name'];
             $admin_email = $_POST['admin_email'];

@@ -25,6 +25,9 @@
                     $uploadOk = 0;
                 }
 
+                $getImgUnlink = getImageUnlink('banner','banners','id',$id,$target_dir);
+                //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
+
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     $sql = "UPDATE `banners` SET title = '$title', banner = '$fileToUpload', status='$status' WHERE id = '$id' ";
                     if($conn->query($sql) === TRUE){

@@ -77,5 +77,20 @@
         $admin_pwd = openssl_decrypt(hex2bin($admin_password),'AES-128-CBC',$key);  
         return $admin_pwd;
     }
+
+    function getImageUnlink($val,$table,$clause,$id,$target_dir){
+        global $conn;
+        $getBanner = "SELECT $val FROM $table WHERE $clause='$id' ";
+        $getRes = $conn->query($getBanner);
+        $row = $getRes->fetch_assoc();
+        $img = $row['banner'];
+        $path = $target_dir.$img.'';
+        chown($path, 666);
+        if (unlink($path)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     
 ?>

@@ -9,11 +9,11 @@
             echo "";
         } else  {            
 
+            $status = $_POST['status'];
+            $title = $_POST['title'];
             if($_FILES["fileToUpload"]["name"]!='') {
-
-                $title = $_POST['title'];                                    
-                $fileToUpload = $_FILES["fileToUpload"]["name"];
-                $status = $_POST['status'];
+                                             
+                $fileToUpload = $_FILES["fileToUpload"]["name"];               
 
                 $target_dir = "../uploads/banner_images/";
                 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

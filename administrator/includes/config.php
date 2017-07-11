@@ -8,9 +8,9 @@ if($setcon == 1) {
 	$password = "capital@123";
 	$dbname = "capitalsecure_latest";
 } else {
-	$servername = "localhost";
+	$servername = "192.168.0.104";
 	$username = "root";
-	$password = "";
+	$password = "root";
 	$dbname = "palle2patnam";
 }
 

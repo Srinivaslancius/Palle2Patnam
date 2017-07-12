@@ -13,7 +13,7 @@ if($setcon == 1) {
 	$password = "root";
 	$dbname = "palle2patnam";
 }
-
+ 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

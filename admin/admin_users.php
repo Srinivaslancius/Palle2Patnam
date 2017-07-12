@@ -8,6 +8,7 @@
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-content">
+                                <a href="add_admin_users.php" style="float:right">Add Admin User</a>
                                 <span class="card-title">Admin Users</span>
                                 <?php $getData = getAllData('admin_users'); ?>
                                 <table id="example" class="display responsive-table datatable-example">

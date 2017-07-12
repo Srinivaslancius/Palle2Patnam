@@ -32,7 +32,14 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="no-padding "><a class="waves-effect waves-grey" href="banners.php"><i class="material-icons">settings_input_svideo</i>Banners</a></li>
+
+                    <li class="no-padding "><a class="waves-effect waves-grey" href="categories.php"><i class="material-icons">settings_input_svideo</i>Categories</a></li>
+
+                    <li class="no-padding "><a class="waves-effect waves-grey" href="weight.php"><i class="material-icons">settings_input_svideo</i>Weight</a></li>
+
                 </ul>
+                
                 <div class="footer">
                     <p class="copyright">Lancius IT Solutions</p>
                     <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>

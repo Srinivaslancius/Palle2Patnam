@@ -35,6 +35,8 @@
                         </div>
                     </li>
                     <li class="no-padding "><a class="waves-effect waves-grey" href="banners.php"><i class="material-icons">settings_input_svideo</i>Banners</a></li>
+
+                    <li class="no-padding "><a class="waves-effect waves-grey" href="categories.php"><i class="material-icons">settings_input_svideo</i>Categories</a></li>
                     
                 </ul>
                 

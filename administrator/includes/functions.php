@@ -83,7 +83,7 @@
         $getBanner = "SELECT $val FROM $table WHERE $clause='$id' ";
         $getRes = $conn->query($getBanner);
         $row = $getRes->fetch_assoc();
-        $img = $row['banner'];
+        $img = $row[$val];
         $path = $target_dir.$img.'';
         chown($path, 666);
         if (unlink($path)) {

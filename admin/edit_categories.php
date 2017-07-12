@@ -7,11 +7,11 @@ $id = $_GET['uid'];
             echo "";
     } else  {            
 
+    $category_name = $_POST['category_name'];  
+    $status = $_POST['status'];
     if($_FILES["category_image"]["name"]!='') {
-
-        $category_name = $_POST['category_name'];                                    
-        $category_image = $_FILES["category_image"]["name"];
-        $status = $_POST['status'];
+                                          
+        $category_image = $_FILES["category_image"]["name"];        
         $target_dir = "../uploads/category_images/";
         $target_file = $target_dir . basename($_FILES["category_image"]["name"]);
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);

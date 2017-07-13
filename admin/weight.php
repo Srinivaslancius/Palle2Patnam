@@ -8,23 +8,21 @@
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-content">
-                                <a href="add_banners.php" style="float:right">Add Banners</a>
-                                <span class="card-title">Banners</span>
-                                <?php $getData = getAllData('banners'); ?>
+                                <a href="add_weight.php" style="float:right">Add Weight</a>
+                                <span class="card-title">Weight</span>
+                                <?php $getData = getAllData('product_weights'); ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
-                                            <th>Banner Title</th>
-                                            <th>Banner</th>                                                                  
-                                            <th>Actions</th>
+                                            <th>weight_type</th>
+                                            <th>Actions</th>                                                                  
                                         </tr>
                                     </thead>                                    
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
-                                            <td><?php echo $row['title'];?></td>
-                                            <td><img src="<?php echo $base_url . 'uploads/banner_images/'.$row['banner'] ?>" height="100" width="100"/></td>                        
-                                            <td><a href="edit_banners.php?bid=<?php echo $row['id']; ?>">Edit</a></td>
+                                            <td><?php echo $row['weight_type'];?></td>
+                                            <td><a href="edit_weight.php?wid=<?php echo $row['id']; ?>">Edit</a></td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

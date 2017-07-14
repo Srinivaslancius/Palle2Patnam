@@ -33,7 +33,7 @@
 
                                 <div class="input-field col s12">
                                     <input id="weight_type" type="text" class="validate" name="weight_type" required>
-                                    <label for="weight_type">weight_type</label>
+                                    <label for="weight_type">Weight Type</label>
                                 </div>
                                 
                                 <div class="input-field col s12">

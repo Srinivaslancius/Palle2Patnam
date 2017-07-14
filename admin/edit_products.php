@@ -2,6 +2,7 @@
            
 <?php include_once 'side_navigation.php';?>
 <?php  
+$id = $_GET['pid'];
 if (!isset($_POST['submit']))  {
             echo "";
 } else  {
@@ -19,8 +20,8 @@ if (!isset($_POST['submit']))  {
     $status = $_POST['status'];
     //save product images into product_images table    
     
-     //$sql = "INSERT INTO products (`product_name`,`category_id`, `price`, `special_price`,`discount_percentage`,`weight_type_id`,`key_features`,`product_info`,`about`,`availability_id`,`status`) VALUES ('$product_name','$category_id', '$price', '$special_price','$discount_percentage','$weight_type_id','$key_features','$product_info','$about','$availability_id','$status')";
-     $last_id = $conn->insert_id;
+     $sql = "UPDATE products set product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+     
     /* $product_images = $_FILES['product_images']['name'];
     foreach($product_images as $key=>$value){             
 
@@ -71,25 +72,30 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="price" type="text" class="validate" name="price" required>
+                                    <input id="price" type="text" class="validate" name="price" required value="<?php echo $getAllProductsData['price']; ?>">
                                     <label for="price">Price</label>
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="special_price" type="text" class="validate" name="special_price" required>
+                                    <input id="special_price" type="text" class="validate" name="special_price" required value="<?php echo $getAllProductsData['special_price']; ?>">
                                     <label for="special_price">Special Price</label>
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required>
+                                    <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required value="<?php echo $getAllProductsData['discount_percentage']; ?>">
                                     <label for="discount_percentage">Discount Percentage</label>
                                 </div>
+
+                                <?php
+                                                                 
+                                    $getWeights = getAllDataCheckActive('product_weights',0);
+                                ?>
 
                                 <div class="input-field col s12">
                                     <select name="weight_type_id" required>
                                         <option value="">Select Weighy Type</option>
                                         <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
+                                        <option <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "selected=selected"; }?>value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
                                         <?php } ?>                                      
                                     </select> 
                                 </div>
@@ -97,37 +103,46 @@ if (!isset($_POST['submit']))  {
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea id="key_features" name="key_features" required><?php echo $row['key_features'];?></textarea>                                        
+                                        <textarea id="key_features" name="key_features" required value="<?php echo $getAllProductsData['key_features']; ?>"><?php echo $getAllProductsData['key_features']; ?></textarea>                                        
                                     </div>
                                 </div>
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Product Info</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea name="product_info"required id="product_info"><?php echo $row['product_info'];?></textarea>                                        
+                                        <textarea name="product_info"required id="product_info"><?php echo $getAllProductsData['product_info']; ?></textarea>                                        
                                     </div>
                                 </div>  
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">About</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea name="about" required id="about"><?php echo $row['about'];?></textarea>
+                                        <textarea name="about" required id="about"><?php echo $getAllProductsData['about']; ?></textarea>
                                     </div>
                                 </div>
 
                                 <div class="input-field col s12">
                                     <select name="availability_id" required>
                                         <option value="" disabled selected>Avalability</option>
-                                        <option value="0">In Stock</option>
-                                        <option value="1">Out Of Stock</option>                                        
+                                        <option value="0" <?php if($getAllProductsData['availability_id'] == 0) { echo "Selected"; }?>>In Stock</option>
+                                        <option value="1" <?php if($getAllProductsData['availability_id'] == 1) { echo "Selected"; }?>>Out Of Stock</option>                                        
                                     </select> 
                                 </div>
+                                <?php
+                                                                 
+                                    $sql = "SELECT product_image FROM product_images where id = $id";
+                                    $getImages= $conn->query($sql);                                                             
+                                    while($row=$getImages->fetch_assoc()) {
+                                    echo "<img src= '../uploads/product_images/".$row['product_image']."' width=100px; height=100px;/>";
+                                    }
+                               
+                                   ?>
 
                                 <div class="input-field col s12">
                                     <select name="status" required>
                                         <option value="" disabled selected>Choose your status</option>
-                                        <option value="0">Active</option>
-                                        <option value="1">In Active</option>                                        
+                                        <option value="0" <?php if($getAllProductsData['status'] == 0) { echo "Selected"; }?>>Active</option>
+                                        <option value="1" <?php if($getAllProductsData['status'] == 1) { echo "Selected"; }?>>In Active</option>                                        
                                     </select>                                    
                                 </div>                                
                                 

@@ -19,7 +19,8 @@ if (!isset($_POST['submit']))  {
     $status = $_POST['status'];
     //save product images into product_images table    
     
-     $sql = "INSERT INTO products (`product_name`,`category_id`, `price`, `special_price`,`discount_percentage`,`weight_type_id`,`key_features`,`product_info`,`about`,`availability_id`,`status`) VALUES ('$product_name','$category_id', '$price', '$special_price','$discount_percentage','$weight_type_id','$key_features','$product_info','$about','$availability_id','$status')";
+     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `price`, `special_price`,`discount_percentage`,`weight_type_id`,`key_features`,`product_info`,`about`,`availability_id`,`status`) VALUES ('$product_name','$category_id', '$price', '$special_price','$discount_percentage','$weight_type_id','$key_features','$product_info','$about','$availability_id','$status')";
+     $result1 = $conn->query($sql1);
      $last_id = $conn->insert_id;
      $product_images = $_FILES['product_images']['name'];
     foreach($product_images as $key=>$value){                  
@@ -32,7 +33,7 @@ if (!isset($_POST['submit']))  {
         $result = $conn->query($sql);
     }
      
-     if($conn->query($sql) === TRUE){
+     if( $result1 == 1){
     echo "<script>alert('Data Updated Successfully');window.location.href='products.php';</script>";
     } else {
        echo "<script>alert('Data Updation Failed');window.location.href='products.php';</script>";

@@ -26,7 +26,7 @@
                                             <td><?php echo $row['product_name'];?></td>
                                             <td><?php echo $row['price'];?></td>
                                             <td><?php echo $row['status'];?></td>
-                                            <td><a href="edit_products.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+                                            <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>">Edit</a></td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

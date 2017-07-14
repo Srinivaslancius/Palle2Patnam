@@ -128,15 +128,24 @@ if (!isset($_POST['submit']))  {
                                         <option value="1" <?php if($getAllProductsData['availability_id'] == 1) { echo "Selected"; }?>>Out Of Stock</option>                                        
                                     </select> 
                                 </div>
-                                <?php
-                                                                 
-                                    $sql = "SELECT product_image FROM product_images where id = $id";
+
+                                 <div class="input-field col s12">
+                                    <?php                                                                 
+                                    $sql = "SELECT product_image FROM product_images where product_id = $id";
                                     $getImages= $conn->query($sql);                                                             
                                     while($row=$getImages->fetch_assoc()) {
-                                    echo "<img src= '../uploads/product_images/".$row['product_image']."' width=100px; height=100px;/>";
+                                        echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <br />";
                                     }
                                
                                    ?>
+                                </div>
+
+                                <div class="input-field col s12">
+                                    Product Images : <br /><br />
+                                    <div class="input_fields_wrap">                                        
+                                        <div><input type="file" name="product_images[]" requird> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                    </div>
+                                </div>
 
                                 <div class="input-field col s12">
                                     <select name="status" required>

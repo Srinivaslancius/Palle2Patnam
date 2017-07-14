@@ -10,7 +10,7 @@ include_once('includes/functions.php');
         
         <!-- Title -->
         <title>Palle2Patnam Admin </title>
-        
+        <meta http-equiv="refresh" content="800;url=logout.php" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">
         <meta name="description" content="Responsive Admin Dashboard Template" />
@@ -18,7 +18,7 @@ include_once('includes/functions.php');
         <meta name="author" content="Steelcoders" />
         
         <!-- Styles -->
-              <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css"/>
+        <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css"/>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">      
         <link href="assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet">  

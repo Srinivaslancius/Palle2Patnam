@@ -38,6 +38,8 @@
 
                     <li class="no-padding "><a class="waves-effect waves-grey" href="weight.php"><i class="material-icons">settings_input_svideo</i>Weight</a></li>
 
+                    <li class="no-padding "><a class="waves-effect waves-grey" href="products.php"><i class="material-icons">settings_input_svideo</i>Products</a></li>
+
                 </ul>
                 
                 <div class="footer">

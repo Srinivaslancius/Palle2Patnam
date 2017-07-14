@@ -11,7 +11,6 @@ if (!isset($_POST['submit']))  {
     $user_mobile = $_POST['user_mobile'];
     $user_address = $_POST['user_address'];
     $created_admin_id = $_SESSION['admin_user_id'];
-
     $created_at = date("Y-m-d h:i:s");
     $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`, `user_address`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile', '$user_address', '$created_admin_id', '$created_at', 2)";
     if($conn->query($sql) === TRUE){

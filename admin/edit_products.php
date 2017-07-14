@@ -20,20 +20,22 @@ if (!isset($_POST['submit']))  {
     $status = $_POST['status'];
     //save product images into product_images table    
     
-     $sql = "UPDATE products set product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
-     
-    /* $product_images = $_FILES['product_images']['name'];
-    foreach($product_images as $key=>$value){             
+    $sql1 = "UPDATE products set product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    $result1=$conn->query($sql1);
+    $product_images = $_FILES['product_images']['name'];
+    foreach($product_images as $key=>$value){
 
         $product_images1 = $_FILES['product_images']['name'][$key];
         $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
         $file_destination = '../uploads/product_images/' . $product_images1;
-        move_uploaded_file($file_tmp, $file_destination);        
-        //$sql = "INSERT INTO product_images ( `product_id`,`product_image`) VALUES ('$last_id','$product_images1')";
-        $result = $conn->query($sql);
-    }*/
+        if($product_images1!=''){
+            move_uploaded_file($file_tmp, $file_destination);        
+            $sql = "INSERT INTO product_images ( `product_id`,`product_image`) VALUES ('$id','$product_images1')";
+            $result = $conn->query($sql);
+        }        
+    }
      
-     if($conn->query($sql) === TRUE){
+     if($result1==1){
         echo "<script>alert('Data Updated Successfully');window.location.href='products.php';</script>";
     } else {
        echo "<script>alert('Data Updation Failed');window.location.href='products.php';</script>";
@@ -86,8 +88,7 @@ if (!isset($_POST['submit']))  {
                                     <label for="discount_percentage">Discount Percentage</label>
                                 </div>
 
-                                <?php
-                                                                 
+                                <?php                                                                 
                                     $getWeights = getAllDataCheckActive('product_weights',0);
                                 ?>
 
@@ -95,7 +96,7 @@ if (!isset($_POST['submit']))  {
                                     <select name="weight_type_id" required>
                                         <option value="">Select Weighy Type</option>
                                         <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                        <option <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "selected=selected"; }?>value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
+                                        <option <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "Selected=Selected"; }?>value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
                                         <?php } ?>                                      
                                     </select> 
                                 </div>
@@ -124,19 +125,18 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     <select name="availability_id" required>
                                         <option value="" disabled selected>Avalability</option>
-                                        <option value="0" <?php if($getAllProductsData['availability_id'] == 0) { echo "Selected"; }?>>In Stock</option>
-                                        <option value="1" <?php if($getAllProductsData['availability_id'] == 1) { echo "Selected"; }?>>Out Of Stock</option>                                        
+                                        <option value="0" <?php if($getAllProductsData['availability_id'] == 0) { echo "Selected=Selected"; }?>>In Stock</option>
+                                        <option value="1" <?php if($getAllProductsData['availability_id'] == 1) { echo "Selected=Selected"; }?>>Out Of Stock</option>                                        
                                     </select> 
                                 </div>
 
                                  <div class="input-field col s12">
                                     <?php                                                                 
-                                    $sql = "SELECT product_image FROM product_images where product_id = $id";
+                                    $sql = "SELECT id,product_image FROM product_images where product_id = $id";
                                     $getImages= $conn->query($sql);                                                             
                                     while($row=$getImages->fetch_assoc()) {
-                                        echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <br />";
-                                    }
-                               
+                                        echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
+                                    }                               
                                    ?>
                                 </div>
 
@@ -172,6 +172,28 @@ if (!isset($_POST['submit']))  {
 
 <?php include_once('ck_editor.php'); include_once 'footer.php'; ?>
 
+<script type="text/javascript">
+$(function(){
+    $(document).on('click','.ajax_img_del',function(){
+        var del_id= $(this).attr('id');
+        var $ele = $(this).parent().parent();
+        $.ajax({
+            type:'POST',
+            url:'delete_image.php',
+            data:{'del_id':del_id},
+            success: function(data){               
+                 if(data=="YES"){
+                    alert("Deleted Scuccesfully");
+                    location.reload();
+                 }else{
+                    alert("Deleted Failed");  
+                 }
+             }
+
+            });
+        });
+});
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
     

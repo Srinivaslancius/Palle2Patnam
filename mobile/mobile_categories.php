@@ -13,8 +13,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				//Chedck the condioton for emptty or not		
 				$lists = array();
 		    	$lists["id"] = $row["id"];
-		    	$lists["title"] = $row["title"];		    	
-		    	$lists["image"] = $base_url."uploads/banner_images/".$row["banner"];
+		    	$lists["category_name"] = $row["category_name"];		    	
+		    	$lists["category_image"] = $base_url."uploads/category_images/".$row["category_image"];
 				array_push($response["lists"], $lists);		 
 			}
 			$response["success"] = 0;

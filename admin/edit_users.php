@@ -13,7 +13,7 @@ $id = $_GET['uid'];
             $user_address = $_POST['user_address'];
             $status = $_POST['status'];
             
-            $sql = "UPDATE `users` SET user_name='$user_name', user_email='$user_name', user_mobile='$user_mobile', user_address='$user_address', status = '$status' WHERE id = '$id' ";
+            $sql = "UPDATE `users` SET user_name='$user_name', user_email='$user_email', user_mobile='$user_mobile', user_address='$user_address', status = '$status' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script>alert('Data Updated Successfully');window.location.href='users.php';</script>";
             } else {
@@ -47,7 +47,7 @@ $id = $_GET['uid'];
                                         <label for="user_mobile">User Mobile</label>
                                     </div>
                                     <div class="input-field col s12">
-                                        <textarea id="user_address" class="materialize-textarea" name="user_address"reurired value="<?php echo $getUsers1['user_address'];?>"></textarea>
+                                        <textarea id="user_address" class="materialize-textarea" name="user_address" required><?php echo $getUsers1['user_address'];?></textarea>
                                         <label for="user_address">User Address</label>
                                     </div>
                                    

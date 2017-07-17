@@ -3,6 +3,11 @@ ob_start();
 session_start();
 include_once('includes/config.php');
 include_once('includes/functions.php');
+
+if(!isset($_SESSION['admin_user_id'])) {
+    header("Location: logout.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

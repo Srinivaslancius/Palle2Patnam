@@ -46,7 +46,7 @@ if (!isset($_POST['submit']))  {
                                         <label for="user_mobile">User Mobile</label>
                                     </div>
                                     <div class="input-field col s12">
-                                        <textarea id="user_address" class="materialize-textarea" name="user_address" ></textarea>
+                                        <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
                                         <label for="user_address">User Address</label>
                                     </div>
                                    

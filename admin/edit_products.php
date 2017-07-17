@@ -6,6 +6,7 @@ $id = $_GET['pid'];
 if (!isset($_POST['submit']))  {
             echo "";
 } else  {
+    //echo "<pre>"; print_r($_POST); die;
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
@@ -20,7 +21,13 @@ if (!isset($_POST['submit']))  {
     $status = $_POST['status'];
     //save product images into product_images table    
     
-    $sql1 = "UPDATE products set product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    
+    if ($conn->query($sql1) === TRUE) {
+    echo "Record updated successfully";
+    } else {
+    echo "Error updating record: " . $conn->error;
+    }
     $result1=$conn->query($sql1);
     $product_images = $_FILES['product_images']['name'];
     foreach($product_images as $key=>$value){
@@ -42,6 +49,7 @@ if (!isset($_POST['submit']))  {
     }
 }
 ?>
+<a href = "dashboard.php">CLICK</a>
 <main class="mn-inner">
     <div class="row">
         <div class="col s12">
@@ -50,7 +58,7 @@ if (!isset($_POST['submit']))  {
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
             <div class="card">
-                <div class="card-content">                                
+                <div class="card-content">
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -61,14 +69,14 @@ if (!isset($_POST['submit']))  {
                                 </div>
                                
                                 <?php
-                                    $getCategories = getAllDataCheckActive('categories',0);                             
-                                    $getWeights = getAllDataCheckActive('product_weights',0);
+                                    $getCategories = getAllDataCheckActive('categories',0);
                                 ?>
+                                
                                 <div class="input-field col s12">
                                     <select name="category_id" required>
                                         <option value="">Select Category</option>
                                         <?php while($row = $getCategories->fetch_assoc()) {  ?>
-                                            <option <?php if($row['id'] == $getAllProductsData['category_id']) { echo "selected=selected"; }?>value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
+                                            <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['category_id']) { echo "selected=selected"; }?> ><?php echo $row['category_name']; ?></option>
                                         <?php } ?>
                                     </select> 
                                 </div>
@@ -96,7 +104,7 @@ if (!isset($_POST['submit']))  {
                                     <select name="weight_type_id" required>
                                         <option value="">Select Weighy Type</option>
                                         <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                        <option <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "Selected=Selected"; }?>value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
+                                        <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "Selected=Selected"; }?> ><?php echo $row['weight_type']; ?></option>
                                         <?php } ?>                                      
                                     </select> 
                                 </div>

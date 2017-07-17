@@ -6,7 +6,7 @@
                             </a>
                         </section>
                         <div class="header-title col s3 m3">      
-                            <span class="chapter-title">Palle2Patnam Admin </span>
+                            <span class="chapter-title"><a href = "dashboard.php"/>Palle2Patnam Admin </span>
                         </div>
                         <form class="left search col s6 hide-on-small-and-down">
                             <div class="input-field">

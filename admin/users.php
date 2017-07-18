@@ -30,7 +30,7 @@
                                             <td><?php echo $row['user_mobile'];?></td>
                                             <td><?php echo $row['user_address'];?></td>
                                             <td><?php echo $row['created_at'];?></td>
-                                            <td><a href="edit_users.php?uid=<?php echo $row['id']; ?>">Edit</a></td>
+                                            <td><a href="edit_users.php?uid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

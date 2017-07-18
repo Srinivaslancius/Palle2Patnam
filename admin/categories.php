@@ -9,7 +9,7 @@
                         <div class="card">
                             <div class="card-content">
                                  <a href="add_categories.php" style="float:right">Add Categories</a>
-                                <span class="card-title">Users</span>
+                                <span class="card-title">Categories</span>
                                 <?php $getData = getAllData('categories'); ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>

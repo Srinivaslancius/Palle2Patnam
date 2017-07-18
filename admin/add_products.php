@@ -17,9 +17,10 @@ if (!isset($_POST['submit']))  {
     $about = $_POST['about'];
     $availability_id = $_POST['availability_id'];
     $status = $_POST['status'];
+    $created_at = date("Y-m-d h:i:s");
     //save product images into product_images table    
     
-     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `price`, `special_price`,`discount_percentage`,`weight_type_id`,`key_features`,`product_info`,`about`,`availability_id`,`status`) VALUES ('$product_name','$category_id', '$price', '$special_price','$discount_percentage','$weight_type_id','$key_features','$product_info','$about','$availability_id','$status')";
+     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `price`, `special_price`,`discount_percentage`,`weight_type_id`,`key_features`,`product_info`,`about`,`availability_id`,`status`,`created_at`) VALUES ('$product_name','$category_id', '$price', '$special_price','$discount_percentage','$weight_type_id','$key_features','$product_info','$about','$availability_id','$status','$created_at')";
      $result1 = $conn->query($sql1);
      $last_id = $conn->insert_id;
      $product_images = $_FILES['product_images']['name'];

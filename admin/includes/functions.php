@@ -27,6 +27,15 @@
         return $result;
     }
 
+     /*Common function with where and check active status for get all records*/
+    function getCategoryByPosition($table,$status)
+    {
+        global $conn;
+        $sql="select * from `$table` WHERE `status` = '$status' ORDER BY display_position ASC";
+        $result = $conn->query($sql);         
+        return $result;
+    }
+
     function getAllDataCheckWithOurOrder($table,$status)
     {
         global $conn;

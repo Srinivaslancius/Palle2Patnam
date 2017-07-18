@@ -6,7 +6,7 @@ $lists = array();
 $response = array();
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
-	$result = getAllDataCheckWithOurOrder('categories','0');
+	$result = getCategoryByPosition('categories','0');
 	if ($result->num_rows > 0) {
 			$response["lists"] = array();
 			while($row = $result->fetch_assoc()) {

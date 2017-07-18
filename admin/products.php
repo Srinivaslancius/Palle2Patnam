@@ -25,7 +25,7 @@
                                         <tr>
                                             <td><?php echo $row['product_name'];?></td>
                                             <td><?php echo $row['price'];?></td>
-                                            <td><?php echo $row['status'];?></td>
+                                            <td><?php if($row['status'] == 0){ echo "Active";}else{ echo "In Active";}?></td>
                                             <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>"><i class="small material-icons">edit</i></a>&nbsp;<a href="#"><i class="small material-icons">pageview</i></a>&nbsp;<a href="#"><i class="small material-icons">delete</i></a></td>
                                         </tr>               
                                         <?php } ?>

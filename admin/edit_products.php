@@ -53,7 +53,7 @@ if (!isset($_POST['submit']))  {
 <main class="mn-inner">
     <div class="row">
         <div class="col s12">
-            <div class="page-title">Banners</div>
+            <div class="page-title">Products</div>
         </div>
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
@@ -146,6 +146,7 @@ if (!isset($_POST['submit']))  {
                                         echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
                                     }                               
                                    ?>
+                                   <!--<a href="#"><i class="small material-icons">delete</i></a>-->
                                 </div>
 
                                 <div class="input-field col s12">

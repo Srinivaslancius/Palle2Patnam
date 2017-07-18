@@ -5,9 +5,9 @@
             echo "";
         } else  {
 
-
             $category_name = $_POST['category_name'];
             $category_image = $_FILES['category_image']["name"];
+            $display_position = $_POST['display_position'];
             $status = $_POST['status'];                                                    
             
             if($category_image!='') {
@@ -23,7 +23,7 @@
                 }
 
                 if (move_uploaded_file($_FILES["category_image"]["tmp_name"], $target_file)) {
-                     $sql = "INSERT INTO categories (`category_name`, `category_image`, `status`) VALUES ('$category_name', '$category_image','$status')";
+                    $sql = "INSERT INTO categories (`category_name`, `category_image`, `display_position`,`status`) VALUES ('$category_name', '$category_image', '$display_position', '$status')";
                     if($conn->query($sql) === TRUE){
                        echo "<script>alert('Data Updated Successfully');window.location.href='categories.php';</script>";
                     } else {
@@ -57,6 +57,11 @@
                                 
                                 <div class="input-field col s6">
                                    Image : <input type="file" name="category_image" id="category_image" required>                                     
+                                </div>
+
+                                <div class="input-field col s12">
+                                    <input id="display_position" type="text" class="validate" name="display_position" required>
+                                    <label for="display_position">Disaplay Position</label>
                                 </div>
 
                                 <div class="input-field col s12">

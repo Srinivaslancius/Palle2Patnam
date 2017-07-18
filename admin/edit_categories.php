@@ -7,7 +7,8 @@ $id = $_GET['uid'];
             echo "";
     } else  {            
 
-    $category_name = $_POST['category_name'];  
+    $category_name = $_POST['category_name']; 
+    $display_position = $_POST['display_position']; 
     $status = $_POST['status'];
     if($_FILES["category_image"]["name"]!='') {
                                           
@@ -26,7 +27,7 @@ $id = $_GET['uid'];
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
 
         if (move_uploaded_file($_FILES["category_image"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `categories` SET category_name = '$category_name', category_image = '$category_image', status='$status' WHERE id = '$id' ";
+            $sql = "UPDATE `categories` SET category_name = '$category_name', category_image = '$category_image', display_position = '$display_position' ,status='$status' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script>alert('Data Updated Successfully');window.location.href='categories.php';</script>";
             } else {
@@ -37,7 +38,7 @@ $id = $_GET['uid'];
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `categories` SET category_name = '$category_name', status='$status' WHERE id = '$id' ";
+        $sql = "UPDATE `categories` SET category_name = '$category_name', display_position = '$display_position', status='$status' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script>alert('Data Updated Successfully');window.location.href='categories.php';</script>";
         } else {
@@ -74,6 +75,11 @@ $id = $_GET['uid'];
                                 
                                 <div class="input-field col s6">
                                    Image : <input type="file" name="category_image" id="category_image">                                     
+                                </div>
+
+                                <div class="input-field col s12">
+                                    <input id="display_position" type="text" class="validate" name="display_position" required value="<?php echo $getCategories1['display_position'];?>">
+                                    <label for="display_position">Disaplay Position</label>
                                 </div>
 
                                 <div class="input-field col s12">

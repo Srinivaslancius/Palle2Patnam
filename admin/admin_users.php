@@ -26,7 +26,7 @@
                                             <td><?php echo $row['admin_name'];?></td>
                                             <td><?php echo $row['admin_email'];?></td>
                                             <td><?php echo $row['created_at'];?></td>
-                                            <td>Edit</td>
+                                            <td><a href="#"><i class="material-icons dp48">edit</i></a><a href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

@@ -9,12 +9,12 @@
                         <div class="card">
                             <div class="card-content">
                                 <a href="add_weight.php" style="float:right">Add Weight</a>
-                                <span class="card-title">Weight</span>
+                                <span class="card-title">Weights</span>
                                 <?php $getData = getAllData('product_weights'); ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
-                                            <th>weight_type</th>
+                                            <th>Weight Type</th>
                                             <th>Actions</th>                                                                  
                                         </tr>
                                     </thead>                                    

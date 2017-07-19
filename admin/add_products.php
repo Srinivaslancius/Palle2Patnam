@@ -98,7 +98,7 @@ if (!isset($_POST['submit']))  {
                                     <label for="discount_percentage">Discount Percentage</label>
                                 </div> -->
 
-                                <div class="field_wrapper">
+                                <div >
                                     <div class="input-field col s4">
                                         <select name="weight_type_id[]" required>
                                             <option value="">Select Weighy Type</option>
@@ -120,21 +120,21 @@ if (!isset($_POST['submit']))  {
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea id="key_features" name="key_features" required></textarea>                                        
+                                        <textarea id="key_features" name="key_features" required><?php echo $row['key_features'];?></textarea>                                        
                                     </div>
                                 </div>
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Product Info</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea name="product_info"required id="product_info"></textarea>                                        
+                                        <textarea name="product_info"required id="product_info"><?php echo $row['product_info'];?></textarea>                                        
                                     </div>
                                 </div>  
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">About</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea name="about" required id="about"></textarea>
+                                        <textarea name="about" required id="about"><?php echo $row['about'];?></textarea>
                                     </div>
                                 </div>
 
@@ -196,9 +196,9 @@ function addInput(divName) {
     var choices_names = <?php echo json_encode($choices_names); ?>;      
     var newDiv = document.createElement('div');
     var selectHTML = "";    
-    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'>";
+    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
     var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
-    removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div>";
+    removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
     }

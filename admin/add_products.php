@@ -8,10 +8,10 @@ if (!isset($_POST['submit']))  {
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-    $price = $_POST['price'];
-    $special_price = $_POST['special_price'];
-    $discount_percentage = $_POST['discount_percentage'];
-    $weight_type_id = $_POST['weight_type_id'];
+    //$price = $_POST['price'];
+    //$special_price = $_POST['special_price'];
+    //$discount_percentage = $_POST['discount_percentage'];
+    //$weight_type_id = $_POST['weight_type_id'];
     $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
     $about = $_POST['about'];
@@ -21,11 +21,21 @@ if (!isset($_POST['submit']))  {
     $created_by = $_SESSION['admin_user_id'];
     //save product images into product_images table    
     
-     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `price`, `special_price`,`discount_percentage`,`weight_type_id`,`key_features`,`product_info`,`about`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$price', '$special_price','$discount_percentage','$weight_type_id','$key_features','$product_info','$about','$availability_id','$status','$created_by','$created_at')";
+     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `key_features`,`product_info`,`about`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$key_features','$product_info','$about','$availability_id','$status','$created_by','$created_at')";
      $result1 = $conn->query($sql1);
      $last_id = $conn->insert_id;
-     $product_images = $_FILES['product_images']['name'];
-    foreach($product_images as $key=>$value){                  
+
+    $product_weights = $_REQUEST['weight_type_id'];
+    foreach($product_weights as $key=>$value){
+
+        $product_weights1 = $_REQUEST['weight_type_id'][$key];
+        $price = $_REQUEST['price'][$key];      
+        $sql = "INSERT INTO product_weight_prices ( `product_id`,`weight_type_id`,`price`) VALUES ('$last_id','$product_weights1','$price')";
+        $result = $conn->query($sql);
+    }
+
+    $product_images = $_FILES['product_images']['name'];
+    foreach($product_images as $key=>$value){
 
         $product_images1 = $_FILES['product_images']['name'][$key];
         $file_tmp = $_FILES["product_images"]["tmp_name"][$key];
@@ -73,7 +83,7 @@ if (!isset($_POST['submit']))  {
                                     </select> 
                                 </div>
 
-                                <div class="input-field col s12">
+                                <!-- <div class="input-field col s12">
                                     <input id="price" type="text" class="validate" name="price" required>
                                     <label for="price">Price</label>
                                 </div>
@@ -86,15 +96,25 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required>
                                     <label for="discount_percentage">Discount Percentage</label>
-                                </div>
+                                </div> -->
 
-                                <div class="input-field col s12">
-                                    <select name="weight_type_id" required>
-                                        <option value="">Select Weighy Type</option>
-                                        <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
-                                        <?php } ?>                                      
-                                    </select> 
+                                <div class="field_wrapper">
+                                    <div class="input-field col s4">
+                                        <select name="weight_type_id[]" required>
+                                            <option value="">Select Weighy Type</option>
+                                            <?php while($row = $getWeights->fetch_assoc()) {  ?>
+                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
+                                            <?php } ?>                                      
+                                        </select> 
+                                    </div>
+                                    <div class="input-field col s4">
+                                       <input id="price" type="text" class="validate" name="price[]" required>
+                                       <label for="price">Price</label>
+                                    </div>
+                                    <div class="input-field col s4">
+                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onclick="addInput('dynamicInput');" /></a>
+                                    </div>
+                                    <div id="dynamicInput" class="input-field col s12"></div>
                                 </div>
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
@@ -158,6 +178,36 @@ if (!isset($_POST['submit']))  {
 </main>
 
 <?php include_once('ck_editor.php'); include_once 'footer.php'; ?>
+
+<?php
+    $sql1 = "SELECT * FROM product_weights where status = '0'";
+    $result1 = $conn->query($sql1);                                    
+?>
+
+<?php while($row = $result1->fetch_assoc()) { 
+   $choices1[] = $row['id'];
+   $choices_names[] = $row['weight_type'];
+} ?>
+
+<script type="text/javascript">
+
+function addInput(divName) {
+    var choices = <?php echo json_encode($choices1); ?>; 
+    var choices_names = <?php echo json_encode($choices_names); ?>;      
+    var newDiv = document.createElement('div');
+    var selectHTML = "";    
+    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
+    removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div>";
+    for(i = 0; i < choices.length; i = i + 1) {
+        selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
+    }
+    selectHTML += "</select></div>";
+    newDiv.innerHTML = selectHTML+ " &nbsp;" +newTextBox +" "+ removeBox;
+    document.getElementById(divName).appendChild(newDiv);
+}
+
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {

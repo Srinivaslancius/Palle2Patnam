@@ -10,10 +10,10 @@ if (!isset($_POST['submit']))  {
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-    $price = $_POST['price'];
-    $special_price = $_POST['special_price'];
-    $discount_percentage = $_POST['discount_percentage'];
-    $weight_type_id = $_POST['weight_type_id'];
+    //$price = $_POST['price'];
+    //$special_price = $_POST['special_price'];
+    //$discount_percentage = $_POST['discount_percentage'];
+    //$weight_type_id = $_POST['weight_type_id'];
     $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
     $about = $_POST['about'];
@@ -21,7 +21,7 @@ if (!isset($_POST['submit']))  {
     $status = $_POST['status'];
     //save product images into product_images table    
     
-    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id', key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
     
     if ($conn->query($sql1) === TRUE) {
     echo "Record updated successfully";
@@ -81,7 +81,7 @@ if (!isset($_POST['submit']))  {
                                     </select> 
                                 </div>
 
-                                <div class="input-field col s12">
+                                <!-- <div class="input-field col s12">
                                     <input id="price" type="text" class="validate" name="price" required value="<?php echo $getAllProductsData['price']; ?>">
                                     <label for="price">Price</label>
                                 </div>
@@ -107,7 +107,7 @@ if (!isset($_POST['submit']))  {
                                         <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "Selected=Selected"; }?> ><?php echo $row['weight_type']; ?></option>
                                         <?php } ?>                                      
                                     </select> 
-                                </div>
+                                </div> -->
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
                                 <div class="input-field col s12">

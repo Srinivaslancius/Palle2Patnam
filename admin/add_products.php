@@ -187,7 +187,7 @@ function addInput(divName) {
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
     selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ><label for='price'>Price</label></div>";
     removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";

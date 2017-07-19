@@ -94,35 +94,7 @@ if (!isset($_POST['submit']))  {
                                             <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['category_id']) { echo "selected=selected"; }?> ><?php echo $row['category_name']; ?></option>
                                         <?php } ?>
                                     </select> 
-                                </div>
-
-                                <!-- <div class="input-field col s12">
-                                    <input id="price" type="text" class="validate" name="price" required value="<?php echo $getAllProductsData['price']; ?>">
-                                    <label for="price">Price</label>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <input id="special_price" type="text" class="validate" name="special_price" required value="<?php echo $getAllProductsData['special_price']; ?>">
-                                    <label for="special_price">Special Price</label>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required value="<?php echo $getAllProductsData['discount_percentage']; ?>">
-                                    <label for="discount_percentage">Discount Percentage</label>
-                                </div>
-
-                                <?php                                                                 
-                                    $getWeights = getAllDataCheckActive('product_weights',0);
-                                ?>
-
-                                <div class="input-field col s12">
-                                    <select name="weight_type_id" required>
-                                        <option value="">Select Weighy Type</option>
-                                        <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                        <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "Selected=Selected"; }?> ><?php echo $row['weight_type']; ?></option>
-                                        <?php } ?>                                      
-                                    </select> 
-                                </div> -->
+                                </div>                                
 
                                 <?php
                                     $sql2 = "SELECT * FROM product_weight_prices where product_id = '$id'";
@@ -242,7 +214,7 @@ function addInput(divName) {
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
     selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ><label for='price'>Price</label></div>";
     removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";

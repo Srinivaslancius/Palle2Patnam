@@ -83,22 +83,7 @@ if (!isset($_POST['submit']))  {
                                     </select> 
                                 </div>
 
-                                <!-- <div class="input-field col s12">
-                                    <input id="price" type="text" class="validate" name="price" required>
-                                    <label for="price">Price</label>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <input id="special_price" type="text" class="validate" name="special_price" required>
-                                    <label for="special_price">Special Price</label>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required>
-                                    <label for="discount_percentage">Discount Percentage</label>
-                                </div> -->
-
-                                <div >
+                                <div>
                                     <div class="input-field col s4">
                                         <select name="weight_type_id[]" required>
                                             <option value="">Select Weighy Type</option>
@@ -199,6 +184,7 @@ function addInput(divName) {
     var choices = <?php echo json_encode($choices1); ?>; 
     var choices_names = <?php echo json_encode($choices_names); ?>;      
     var newDiv = document.createElement('div');
+    newDiv.className = 'new_appen_class';
     var selectHTML = "";    
     selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
     var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
@@ -210,6 +196,13 @@ function addInput(divName) {
     newDiv.innerHTML = selectHTML+ " &nbsp;" +newTextBox +" "+ removeBox;
     document.getElementById(divName).appendChild(newDiv);
 }
+
+$(document).ready(function() {
+    $(dynamicInput).on("click",".remove_button", function(e){ //user click on remove text
+        e.preventDefault();
+        $(this).parent().parent().remove();
+    })
+});
 
 </script>
 

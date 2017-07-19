@@ -195,6 +195,7 @@ function addInput(divName) {
     var choices = <?php echo json_encode($choices1); ?>; 
     var choices_names = <?php echo json_encode($choices_names); ?>;      
     var newDiv = document.createElement('div');
+    newDiv.className = 'new_appen_class';
     var selectHTML = "";    
     selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
     var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
@@ -206,6 +207,13 @@ function addInput(divName) {
     newDiv.innerHTML = selectHTML+ " &nbsp;" +newTextBox +" "+ removeBox;
     document.getElementById(divName).appendChild(newDiv);
 }
+
+$(document).ready(function() {
+    $(dynamicInput).on("click",".remove_button", function(e){ //user click on remove text
+        e.preventDefault();
+        $(this).parent().parent().remove();
+    })
+});
 
 </script>
 

@@ -102,28 +102,28 @@ if (!isset($_POST['submit']))  {
                                     <div id="dynamicInput" class="input-field col s12"></div>
                                 </div>
                                 
-                                <div>
-                                    <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
+                                <div>                                    
                                     <div class="input-field col s12">
+                                        <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea id="key_features" name="key_features" required><?php echo $row['key_features'];?></textarea>                                        
+                                            <textarea id="key_features" name="key_features" required></textarea>                                        
                                         </div>
                                     </div>
                                 </div>    
 
-                                <div>
-                                    <label for="name" class="col-lg-3 col-sm-3 control-label">Product Info</label>
+                                <div>                                    
                                     <div class="input-field col s12">
+                                        <span for="name" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea name="product_info"required id="product_info"><?php echo $row['product_info'];?></textarea>                                        
+                                            <textarea name="product_info" required id="product_info"></textarea>                                        
                                         </div>
                                     </div>  
                                 </div>
-                                <div>    
-                                    <label for="name" class="col-lg-3 col-sm-3 control-label">About</label>
+                                <div>
                                     <div class="input-field col s12">
+                                        <span for="name" class="col-lg-3 col-sm-3 control-label">About</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea name="about" required id="about"><?php echo $row['about'];?></textarea>
+                                            <textarea name="about" required id="about"></textarea>
                                         </div>
                                     </div>
                                 </div>    

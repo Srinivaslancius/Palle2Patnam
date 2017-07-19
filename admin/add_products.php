@@ -83,22 +83,7 @@ if (!isset($_POST['submit']))  {
                                     </select> 
                                 </div>
 
-                                <!-- <div class="input-field col s12">
-                                    <input id="price" type="text" class="validate" name="price" required>
-                                    <label for="price">Price</label>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <input id="special_price" type="text" class="validate" name="special_price" required>
-                                    <label for="special_price">Special Price</label>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required>
-                                    <label for="discount_percentage">Discount Percentage</label>
-                                </div> -->
-
-                                <div >
+                                <div>
                                     <div class="input-field col s4">
                                         <select name="weight_type_id[]" required>
                                             <option value="">Select Weighy Type</option>

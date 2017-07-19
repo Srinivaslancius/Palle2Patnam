@@ -29,6 +29,21 @@ if (!isset($_POST['submit']))  {
     echo "Error updating record: " . $conn->error;
     }
     $result1=$conn->query($sql1);
+
+    //Delete weight and prices
+    $del = "DELETE FROM product_weight_prices WHERE product_id = '$id' ";
+    $result = $conn->query($del);
+
+    $product_weights = $_REQUEST['weight_type_id'];
+    foreach($product_weights as $key=>$value){
+
+        $product_weights1 = $_REQUEST['weight_type_id'][$key];
+        $price = $_REQUEST['price'][$key];      
+        $sql = "INSERT INTO product_weight_prices ( `product_id`,`weight_type_id`,`price`) VALUES ('$id','$product_weights1','$price')";
+        $result = $conn->query($sql);
+    }
+
+
     $product_images = $_FILES['product_images']['name'];
     foreach($product_images as $key=>$value){
 
@@ -109,6 +124,33 @@ if (!isset($_POST['submit']))  {
                                     </select> 
                                 </div> -->
 
+                                <?php
+                                    $sql2 = "SELECT * FROM product_weight_prices where product_id = '$id'";
+                                    $result2 = $conn->query($sql2);                                    
+                                ?>
+                                <div>
+                                    <?php while($row2 = $result2->fetch_assoc()) { ?>
+                                        <div class="input-field col s6">
+                                            <?php $result = getAllData('product_weights'); ?>                                                
+                                            <select name="weight_type_id[]">
+                                                <?php while($row = $result->fetch_assoc()) { ?>
+                                                <?php $getTermName = getIndividualDetails($row2['weight_type_id'],'product_weights','id'); ?>
+                                                    <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $row2['weight_type_id']) { echo "Selected"; } ?>><?php echo $row['weight_type']; ?></option>
+                                                <?php } ?>
+                                            </select>  
+                                        </div>
+                                        <div class="input-field col s6">
+                                           <input type="text" name="price[]" value="<?php echo $row2['price']; ?>"/>
+                                           <label for="price">Price</label>
+                                        </div>
+                                    <?php } ?>
+
+                                    <div class="input-field col s4">
+                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onclick="addInput('dynamicInput');" /></a>
+                                    </div>
+                                    <div id="dynamicInput" class="input-field col s12"></div>
+                                
+
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
@@ -180,6 +222,44 @@ if (!isset($_POST['submit']))  {
 </main>
 
 <?php include_once('ck_editor.php'); include_once 'footer.php'; ?>
+
+<?php
+    $sql1 = "SELECT * FROM product_weights where status = '0'";
+    $result1 = $conn->query($sql1);                                    
+?>
+
+<?php while($row = $result1->fetch_assoc()) { 
+   $choices1[] = $row['id'];
+   $choices_names[] = $row['weight_type'];
+} ?>
+
+<script type="text/javascript">
+
+function addInput(divName) {
+    var choices = <?php echo json_encode($choices1); ?>; 
+    var choices_names = <?php echo json_encode($choices_names); ?>;      
+    var newDiv = document.createElement('div');
+    newDiv.className = 'new_appen_class';
+    var selectHTML = "";    
+    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ></div>";
+    removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
+    for(i = 0; i < choices.length; i = i + 1) {
+        selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
+    }
+    selectHTML += "</select></div>";
+    newDiv.innerHTML = selectHTML+ " &nbsp;" +newTextBox +" "+ removeBox;
+    document.getElementById(divName).appendChild(newDiv);
+}
+
+$(document).ready(function() {
+    $(dynamicInput).on("click",".remove_button", function(e){ //user click on remove text
+        e.preventDefault();
+        $(this).parent().parent().remove();
+    })
+});
+
+</script>
 
 <script type="text/javascript">
 $(function(){

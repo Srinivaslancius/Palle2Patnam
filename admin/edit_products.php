@@ -151,22 +151,22 @@ if (!isset($_POST['submit']))  {
                                     <div id="dynamicInput" class="input-field col s12"></div>
                                 
 
-                                <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
                                 <div class="input-field col s12">
+                                    <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
                                     <div class="col-lg-9">
                                         <textarea id="key_features" name="key_features" required value="<?php echo $getAllProductsData['key_features']; ?>"><?php echo $getAllProductsData['key_features']; ?></textarea>                                        
                                     </div>
                                 </div>
 
-                                <label for="name" class="col-lg-3 col-sm-3 control-label">Product Info</label>
                                 <div class="input-field col s12">
+                                    <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                     <div class="col-lg-9">
                                         <textarea name="product_info"required id="product_info"><?php echo $getAllProductsData['product_info']; ?></textarea>                                        
                                     </div>
                                 </div>  
 
-                                <label for="name" class="col-lg-3 col-sm-3 control-label">About</label>
                                 <div class="input-field col s12">
+                                    <span for="keyfet" class="col-lg-3 col-sm-3 control-label">About</span> <br /><br />
                                     <div class="col-lg-9">
                                         <textarea name="about" required id="about"><?php echo $getAllProductsData['about']; ?></textarea>
                                     </div>

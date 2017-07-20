@@ -6,13 +6,22 @@ if (!isset($_POST['submit']))  {
             echo "";
 } else  {
     //Save data into database
+    /*echo "<pre>";
+    print_r($_POST);die;*/
     $user_name = $_POST['user_name'];
     $user_email = $_POST['user_email'];
     $user_mobile = $_POST['user_mobile'];
-    $user_address = $_POST['user_address'];
+    $street_name = $_POST['street_name'];
+    $street_no = $_POST['street_no'];
+    $flat_name = $_POST['flat_name'];
+    $flat_no = $_POST['flat_no'];
+    $location = $_POST['location'];
+    $landmark = $_POST['landmark'];
+    $pincode = $_POST['pincode'];
     $created_admin_id = $_SESSION['admin_user_id'];
     $created_at = date("Y-m-d h:i:s");
-    $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`, `user_address`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile', '$user_address', '$created_admin_id', '$created_at', 2)";
+    
+    $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`,`street_name`,`street_no`,`flat_name`,`flat_no`,`location`,`landmark`,`pincode`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile','$street_name','$street_no','$flat_name','$flat_no','$location','$landmark','$pincode', '$created_admin_id', '$created_at', 2)";
     if($conn->query($sql) === TRUE){
        echo "<script>alert('Data Updated Successfully');window.location.href='users.php';</script>";
     } else {
@@ -45,11 +54,42 @@ if (!isset($_POST['submit']))  {
                                         <input id="user_mobile" type="text" class="validate" name="user_mobile" required>
                                         <label for="user_mobile">User Mobile</label>
                                     </div>
-                                    <div class="input-field col s12">
-                                        <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
-                                        <label for="user_address">User Address</label>
+                                    
+                                    <div class="input-field col s6">
+                                        <input id="street_name" type="text" class="validate" name="street_name" required>
+                                        <label for="street_name">Street Name</label>
                                     </div>
-                                   
+
+                                    <div class="input-field col s6">
+                                        <input id="street_no" type="text" class="validate" name="street_no" required>
+                                        <label for="street_no">Street Number</label>
+                                    </div>
+
+                                    <div class="input-field col s6">
+                                        <input id="flat_name" type="text" class="validate" name="flat_name" required>
+                                        <label for="flat_name">Flat Name</label>
+                                    </div>
+                                    
+                                    <div class="input-field col s6">
+                                        <input id="flat_no" type="text" class="validate" name="flat_no" required>
+                                        <label for="flat_no">Flat Number</label>
+                                    </div>
+
+                                    <div class="input-field col s6">
+                                        <input id="location" type="text" class="validate" name="location" required>
+                                        <label for="location">Location</label>
+                                    </div>
+
+                                    <div class="input-field col s6">
+                                        <input id="landmark" type="text" class="validate" name="landmark" required>
+                                        <label for="landmark">Landmark</label>
+                                    </div>
+
+                                    <div class="input-field col s6">
+                                        <input id="pincode" type="text" class="validate" name="pincode" required>
+                                        <label for="pincode">Pincode</label>
+                                    </div>
+
                                 </div>
                                 <div class="row">                                            
                                     <div class="col s12 l3">                                                

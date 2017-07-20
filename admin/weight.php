@@ -22,7 +22,7 @@
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?php echo $row['weight_type'];?></td>
-                                            <td><a href="edit_weight.php?wid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a href="#"><i class="material-icons dp48">pageview</i></a></td>
+                                            <td><a href="edit_weight.php?wid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a></td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

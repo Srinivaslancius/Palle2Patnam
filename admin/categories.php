@@ -24,7 +24,7 @@
                                         <tr>
                                             <td><?php echo $row['category_name'];?></td>
                                             <td><img src="<?php echo $base_url . 'uploads/category_images/'.$row['category_image'] ?>" height="50px" width="50px"/></td>                        
-                                            <td><a href="edit_categories.php?uid=<?php echo $row['id']; ?>"><i class="small material-icons">edit</i></a>&nbsp;<a href="#"><i class="small material-icons">pageview</i></a>&nbsp;</td>
+                                            <td><a href="edit_categories.php?uid=<?php echo $row['id']; ?>"><i class="small material-icons">edit</i></a>&nbsp;</td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

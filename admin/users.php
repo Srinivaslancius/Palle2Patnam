@@ -38,17 +38,16 @@
                                                         </div>
                                                         <div class="modal-body" >
                                                             
-                                                            <h5 class="modal-title-set"><b>Name : </b><?php echo $row['user_name'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Email : </b><?php echo $row['user_email'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['user_mobile'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['user_mobile'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['street_name'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['street_no'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['flat_name'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['flat_no'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['location'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['landmark'];?></h5>
-                                                            <h5 class="modal-title-set"><b>Mobile : </b><?php echo $row['pincode'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Name: </b><?php echo $row['user_name'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Email: </b><?php echo $row['user_email'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Mobile: </b><?php echo $row['user_mobile'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Street Name: </b><?php echo $row['street_name'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Street Number: </b><?php echo $row['street_no'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Flat Name: </b><?php echo $row['flat_name'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Flat Number: </b><?php echo $row['flat_no'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Location: </b><?php echo $row['location'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Landmark: </b><?php echo $row['landmark'];?></h5>
+                                                            <h5 class="modal-title-set"><b>Pincode: </b><?php echo $row['pincode'];?></h5>
                                                             
                                                             <h5 class="modal-title-set"><b>Date : </b><?php echo $row['created_at'];?></h5>
                                                         </div>

@@ -10,10 +10,16 @@ $id = $_GET['uid'];
             $user_name = $_POST['user_name'];
             $user_email = $_POST['user_email'];
             $user_mobile = $_POST['user_mobile'];
-            $user_address = $_POST['user_address'];
+            $street_name = $_POST['street_name'];
+            $street_no = $_POST['street_no'];
+            $flat_name = $_POST['flat_name'];
+            $flat_no = $_POST['flat_no'];
+            $location = $_POST['location'];
+            $landmark = $_POST['landmark'];
+            $pincode = $_POST['pincode'];
             $status = $_POST['status'];
             
-            $sql = "UPDATE `users` SET user_name='$user_name', user_email='$user_email', user_mobile='$user_mobile', user_address='$user_address', status = '$status' WHERE id = '$id' ";
+            $sql = "UPDATE `users` SET user_name='$user_name', user_email='$user_email', user_mobile='$user_mobile',street_name= '$street_name',street_no = '$street_no',flat_name = '$flat_name',flat_no = '$flat_no',location = '$location',landmark = '$landmark',pincode = '$pincode',status = '$status' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script>alert('Data Updated Successfully');window.location.href='users.php';</script>";
             } else {
@@ -39,16 +45,40 @@ $id = $_GET['uid'];
                                         <label for="user_name">User Name</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_email" type="email" class="validate" name="user_email" required value="<?php echo $getUsers1['user_email'];?>">
-                                        <label for="user_email">User Email</label>
+                                        <input id="user_email" type="email" class="validate" name="user_email" value="<?php echo $getUsers1['user_email'];?>">
+                                        <label for="user_email">User Email(Optional)</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="user_mobile" type="text" class="validate" name="user_mobile" required value="<?php echo $getUsers1['user_mobile'];?>">
                                         <label for="user_mobile">User Mobile</label>
                                     </div>
-                                    <div class="input-field col s12">
-                                        <textarea id="user_address" class="materialize-textarea" name="user_address" required><?php echo $getUsers1['user_address'];?></textarea>
-                                        <label for="user_address">User Address</label>
+                                    <div class="input-field col s6">
+                                        <input id="street_name" type="text" class="validate" name="street_name" required value="<?php echo $getUsers1['street_name'];?>">
+                                        <label for="street_name">Street Name</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="street_no" type="text" class="validate" name="street_no" required value="<?php echo $getUsers1['street_no'];?>">
+                                        <label for="street_no">Street Number</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="flat_name" type="text" class="validate" name="flat_name" required value="<?php echo $getUsers1['flat_name'];?>">
+                                        <label for="flat_name">Flat Name</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="flat_no" type="text" class="validate" name="flat_no" required value="<?php echo $getUsers1['flat_no'];?>">
+                                        <label for="flat_no">Flat Number</label>
+                                    </div>
+                                   <div class="input-field col s6">
+                                        <input id="location" type="text" class="validate" name="location" required value="<?php echo $getUsers1['location'];?>">
+                                        <label for="location">Location</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="landmark" type="text" class="validate" name="landmark" required value="<?php echo $getUsers1['landmark'];?>">
+                                        <label for="landmark">Landmark</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="pincode" type="text" class="validate" name="pincode" value="<?php echo $getUsers1['pincode'];?>">
+                                        <label for="pincode">Pincode(Optional)</label>
                                     </div>
                                    
                                     <div class="input-field col s12">

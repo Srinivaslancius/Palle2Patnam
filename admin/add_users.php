@@ -47,8 +47,8 @@ if (!isset($_POST['submit']))  {
                                         <label for="user_name">User Name</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_email" type="email" class="validate" name="user_email" required>
-                                        <label for="user_email">User Email</label>
+                                        <input id="user_email" type="email" class="validate" name="user_email">
+                                        <label for="user_email">User Email(Optional)</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="user_mobile" type="text" class="validate" name="user_mobile" required>
@@ -86,8 +86,8 @@ if (!isset($_POST['submit']))  {
                                     </div>
 
                                     <div class="input-field col s6">
-                                        <input id="pincode" type="text" class="validate" name="pincode" required>
-                                        <label for="pincode">Pincode</label>
+                                        <input id="pincode" type="text" class="validate" name="pincode">
+                                        <label for="pincode">Pincode(Optional)</label>
                                     </div>
 
                                 </div>

@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			    	$getImgDetails = getAllDataWhere('product_images','product_id',$row['id']);
 		    		$getImgDet = array();
 			    	while($getImgDet = $getImgDetails->fetch_assoc()) {
-			    		$lists["image"] = $base_url."uploads/product_images/".$getImgDet["product_image"];				    			    		
+			    		$lists["image"]  .= $base_url."uploads/product_images/".$getImgDet["product_image"].",";		    			    		
 			    	}
 					array_push($response["lists"], $lists);		 
 				}

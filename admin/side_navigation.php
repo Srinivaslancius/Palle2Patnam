@@ -45,6 +45,8 @@
 
                     <li class="no-padding <?php if($page_name == 'products.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="products.php"><i class="material-icons">cloud_upload</i>Products</a></li>
 
+                    <li class="no-padding <?php if($page_name == 'content_pages.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="content_pages.php"><i class="material-icons">content_copy</i>Content Pages</a></li>
+
                 </ul>
                 
                 <div class="footer">

@@ -61,14 +61,14 @@ $id = $_GET['uid'];
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
-<?php $getCategories = getAllDataWhere('categories', 'id', $_GET['uid']); $getCategories1 = $getCategories->fetch_assoc(); ?>
+                                <?php $getCategories = getAllDataWhere('categories', 'id', $_GET['uid']); $getCategories1 = $getCategories->fetch_assoc(); ?>
                                 <div class="input-field col s12">
                                     <p class="p-v-xs col s4">
-                                        <input class="with-gap" name="category_type" id="test2" type="radio" required value="0" <?php if($getCategories1['category_type']  == 0){ checked="checked"};?>
+                                        <input class="with-gap" name="category_type" id="test1" type="radio" <?php if($getCategories1['category_type']  == 0){ echo "checked=checked"; }?> required value="0" >
                                         <label for="test1">Category</label>
                                     </p>
                                     <p class="p-v-xs col s4">
-                                        <input class="with-gap" name="category_type" id="test2" type="radio" required value="1" <?php if($getCategories1['category_type']  == 1){ checked ="checked"};?>
+                                        <input class="with-gap" name="category_type" id="test2" type="radio" <?php if($getCategories1['category_type']  == 1){ echo "checked=checked"; }?>  required value="1">
                                         <label for="test2">Offers</label>
                                     </p>
                                 </div>

@@ -5,6 +5,7 @@
             echo "";
         } else  {
 
+            $category_type = $_POST['category_type'];
             $category_name = $_POST['category_name'];
             $category_image = $_FILES['category_image']["name"];
             $display_position = $_POST['display_position'];
@@ -23,7 +24,7 @@
                 }
 
                 if (move_uploaded_file($_FILES["category_image"]["tmp_name"], $target_file)) {
-                    $sql = "INSERT INTO categories (`category_name`, `category_image`, `display_position`,`status`) VALUES ('$category_name', '$category_image', '$display_position', '$status')";
+                    $sql = "INSERT INTO categories (`category_type`, `category_name`, `category_image`, `display_position`,`status`) VALUES ('$category_type', '$category_name', '$category_image', '$display_position', '$status')"; 
                     if($conn->query($sql) === TRUE){
                        echo "<script>alert('Data Updated Successfully');window.location.href='categories.php';</script>";
                     } else {
@@ -49,7 +50,18 @@
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
-
+                                
+                                <div class="input-field col s12">
+                                    <p class="p-v-xs col s4">
+                                        <input class="with-gap" name="category_type" id="test1" type="radio" value="0" required>
+                                        <label for="test1">Category</label>
+                                    </p>
+                                    <p class="p-v-xs col s4">
+                                        <input class="with-gap" name="category_type" id="test2" type="radio" value="1" required>
+                                        <label for="test2">Offers</label>
+                                    </p>
+                                </div>
+                                
                                 <div class="input-field col s12">
                                     <input id="title" type="text" class="validate" name="category_name" required>
                                     <label for="title">Category Name</label>

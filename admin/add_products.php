@@ -64,11 +64,6 @@ if (!isset($_POST['submit']))  {
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
-
-                                <div class="input-field col s12">
-                                    <input id="product_name" type="text" class="validate" name="product_name" required>
-                                    <label for="product_name">Product Name</label>
-                                </div>
                                
                                 <?php
                                     $getCategories = getAllDataCheckActive('categories',0);                             
@@ -81,6 +76,11 @@ if (!isset($_POST['submit']))  {
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
                                         <?php } ?>
                                     </select> 
+                                </div>
+
+                                 <div class="input-field col s12">
+                                    <input id="product_name" type="text" class="validate" name="product_name" required>
+                                    <label for="product_name">Product Name</label>
                                 </div>
 
                                 <div>

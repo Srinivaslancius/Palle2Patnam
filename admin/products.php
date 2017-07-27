@@ -10,11 +10,29 @@
                             <div class="card-content">
                                  <a href="add_products.php" style="float:right">Add Product</a>
                                 <span class="card-title">Products</span>
-                                <?php $getData = getAllData('products'); ?>
+
+                                <?php $sql = "SELECT products.category_id, categories.category_name FROM products LEFT JOIN categories ON products.category_id=categories.id GROUP BY products.category_id";
+                                      $result = $conn->query($sql);
+                                ?>
+
+                                <div class="col s12 m12 l12">
+                                    <div class="col s4 m4 l4">
+                                        <select id="select-category">
+                                          <option value="">Select Category</option>
+                                          <?php while ($getAllCategories = $result->fetch_assoc()) { ?>
+                                            <option value="<?php echo $getAllCategories['category_name']; ?>"><?php echo $getAllCategories['category_name']; ?></option>
+                                          <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <?php $getData = getAllDataWithActiveRecent('products'); $i=1; ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Product Name</th>
+                                            <th>Category Name</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -22,7 +40,9 @@
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
+                                            <td><?php echo $i; ?></td>
                                             <td><?php echo $row['product_name'];?></td>
+                                            <td><?php $getCategoryName = getIndividualDetails($row['category_id'],'categories','id'); echo $getCategoryName['category_name']; ?></td>
                                             <td><?php if($row['status'] == 0){ echo "Active";}else{ echo "In Active";}?></td>
                                             <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a>
                                             
@@ -54,7 +74,7 @@
                                             </div> 
 
                                         </tr>               
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </tbody>
                                 </table>
                             </div>

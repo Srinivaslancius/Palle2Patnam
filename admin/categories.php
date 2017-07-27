@@ -10,7 +10,7 @@
                             <div class="card-content">
                                  <a href="add_categories.php" style="float:right">Add Categories</a>
                                 <span class="card-title">Categories</span>
-                                <?php $getData = getAllData('categories'); ?>
+                                <?php $getData = getAllDataWithActiveRecent('categories'); ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>

@@ -7,6 +7,7 @@ $id = $_GET['uid'];
             echo "";
     } else  {            
 
+    $category_type = $_POST['category_type'];    
     $category_name = $_POST['category_name']; 
     $display_position = $_POST['display_position']; 
     $status = $_POST['status'];
@@ -27,7 +28,7 @@ $id = $_GET['uid'];
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
 
         if (move_uploaded_file($_FILES["category_image"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `categories` SET category_name = '$category_name', category_image = '$category_image', display_position = '$display_position' ,status='$status' WHERE id = '$id' ";
+            $sql = "UPDATE `categories` SET category_type = '$category_type', category_name = '$category_name', category_image = '$category_image', display_position = '$display_position' ,status='$status' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script>alert('Data Updated Successfully');window.location.href='categories.php';</script>";
             } else {
@@ -38,7 +39,7 @@ $id = $_GET['uid'];
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `categories` SET category_name = '$category_name', display_position = '$display_position', status='$status' WHERE id = '$id' ";
+        $sql = "UPDATE `categories` SET category_type = '$category_type', category_name = '$category_name', display_position = '$display_position', status='$status' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script>alert('Data Updated Successfully');window.location.href='categories.php';</script>";
         } else {
@@ -61,6 +62,16 @@ $id = $_GET['uid'];
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
 <?php $getCategories = getAllDataWhere('categories', 'id', $_GET['uid']); $getCategories1 = $getCategories->fetch_assoc(); ?>
+                                <div class="input-field col s12">
+                                    <p class="p-v-xs col s4">
+                                        <input class="with-gap" name="category_type" id="test2" type="radio" required value="0" <?php if($getCategories1['category_type']  == 0){ checked="checked"};?>
+                                        <label for="test1">Category</label>
+                                    </p>
+                                    <p class="p-v-xs col s4">
+                                        <input class="with-gap" name="category_type" id="test2" type="radio" required value="1" <?php if($getCategories1['category_type']  == 1){ checked ="checked"};?>
+                                        <label for="test2">Offers</label>
+                                    </p>
+                                </div>
                                 <div class="input-field col s12">
                                     <input id="title" type="text" class="validate" name="category_name" required value="<?php echo $getCategories1['category_name'];?>">
                                     <label for="title">Category Name</label>

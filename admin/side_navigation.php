@@ -36,6 +36,16 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="no-padding">
+                        <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'admin_users.php' || $page_name == 'vendors.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Vendors<i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                               <li><a href="vendors.php">Vendors</a></li>
+                               <li><a href="milk_vendors.php">Milk Vendors</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     
                     <li class="no-padding <?php if($page_name == 'banners.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="banners.php"><i class="material-icons">collections</i>Banners</a></li>
 

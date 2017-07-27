@@ -63,10 +63,20 @@
     }
 
     /* Common function for get count for rows */
-     function getRowsCount($table,$userId)
+     function getRowsCountWithUserId($table,$userId)
     {
         global $conn;
         $sql="select * from `$table` WHERE `user_id` = '$userId' ";
+        $result = $conn->query($sql);
+        $noRows = $result->num_rows;        
+        return $noRows;
+    }
+
+    /* Common function for get count for rows */
+     function getRowsCount($table)
+    {
+        global $conn;
+        $sql="select * from `$table` ";
         $result = $conn->query($sql);
         $noRows = $result->num_rows;        
         return $noRows;

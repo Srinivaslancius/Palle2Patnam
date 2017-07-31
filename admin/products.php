@@ -57,7 +57,6 @@
                                                     <h5 class="modal-title-set"><b>Features: </b><?php echo strip_tags($row['key_features']);?></h5>
                                                     <h5 class="modal-title-set"><b>Info: </b><?php echo strip_tags($row['product_info']);?></h5>
                                                     <h5 class="modal-title-set"><b>About: </b><?php echo strip_tags($row['about']);?></h5>
-                                                    
                                                     <h5 class="modal-title-set"><b>Category Type: </b><?php $getCategoryName = getIndividualDetails($row['category_id'],'categories','id'); echo $getCategoryName['category_name']; ?></h5>
 
                                                     <h5 class="modal-title-set"><b>Product Images:</b><?php

@@ -8,16 +8,16 @@
             $user_id = $_POST['user_id'];
             $product_id = $_POST['product_id'];
             $total_ltr = $_POST['total_ltr'];
-            $extra_ltr = $_POST['extra_ltr'];
-            $order_date = $_POST['order_date'];            
+            $cancel_ltr = $_POST['cancel_ltr'];
+            $cancel_date = $_POST['cancel_date'];            
             $created_at = date("Y-m-d h:i:s");          
             //$status = $_POST['status'];                                           
         
-            $sql = "INSERT INTO extra_milk_orders (`user_id`, `product_id`, `total_ltr`, `extra_ltr`, `order_date`, `created_at`) VALUES ('$user_id','$product_id', '$total_ltr','$extra_ltr', STR_TO_DATE('$order_date', '%m/%d/%Y'), '$created_at')";
+            $sql = "INSERT INTO cancel_milk_orders (`user_id`, `product_id`, `total_ltr`, `cancel_ltr`, `cancel_date`, `created_at`) VALUES ('$user_id','$product_id', '$total_ltr','$cancel_ltr', STR_TO_DATE('$cancel_date', '%m/%d/%Y'), '$created_at')";
             if($conn->query($sql) === TRUE){
-               echo "<script>alert('Data Updated Successfully');window.location.href='extra_milk_orders.php';</script>";
+               echo "<script>alert('Data Updated Successfully');window.location.href='cancel_milk_orders.php';</script>";
             } else {
-               echo "<script>alert('Data Updation Failed');window.location.href='extra_milk_orders.php';</script>";
+               echo "<script>alert('Data Updation Failed');window.location.href='cancel_milk_orders.php';</script>";
             }
             
         }
@@ -62,13 +62,13 @@
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="extra_ltr" type="text" class="validate" name="extra_ltr" required>
-                                    <label for="extra_ltr">Extra Ltrs</label>
+                                    <input id="cancel_ltr" type="text" class="validate" name="cancel_ltr" required>
+                                    <label for="cancel_ltr">Cancel Ltrs</label>
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <label for="order_date">Order Date</label>
-                                    <input id="order_date" name="order_date" type="text" class="datepicker">
+                                    <label for="cancel_date">Cancel Date</label>
+                                    <input id="cancel_date" name="cancel_date" type="text" class="datepicker">
                                 </div>
                                 
                                 <div class="input-field col s12">

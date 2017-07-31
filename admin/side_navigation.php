@@ -56,12 +56,23 @@
                     <li class="no-padding <?php if($page_name == 'products.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="products.php"><i class="material-icons">cloud_upload</i>Products</a></li>
 
                     <li class="no-padding">
-                        <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'milk_orders.php' || $page_name == 'extra_milk_orders.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Milk Orders <i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'milk_orders.php' || $page_name == 'extra_milk_orders.php' || $page_name == 'cancel_milk_orders.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Milk Orders <i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                         <div class="collapsible-body">
                             <ul>
                                <li><a href="milk_orders.php">Milk Orders</a></li>
-                               <li><a href="extra_milk_orders.php">Extra Orders</a></li>
-                               <li><a href="cancel_orders.php">Cancel Orders</a></li>
+                               <li><a href="extra_milk_orders.php">Extra Milk Orders</a></li>
+                               <li><a href="cancel_milk_orders.php">Cancel Orders</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="no-padding">
+                        <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'milk_orders.php' || $page_name == 'extra_milk_orders.php' || $page_name == 'cancel_milk_orders.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Order Reports <i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                               <li><a href="milk_orders.php">Daily Order Reports</a></li>
+                               <li><a href="extra_milk_orders.php">Monthly Order  Reports</a></li>
+                               <li><a href="cancel_milk_orders.php">Yearly Orders Reports</a></li>
                             </ul>
                         </div>
                     </li>

@@ -11,13 +11,13 @@
             $extra_ltr = $_POST['extra_ltr'];
             $order_date = $_POST['order_date'];            
             $created_at = date("Y-m-d h:i:s");          
-            //$status = $_POST['status'];                                               
+            //$status = $_POST['status'];                                           
         
-            $sql = "INSERT INTO extra_milk_orders (`user_id`, `product_id`, `total_ltr`, `extra_ltr`, `end_date`, `created_at`) VALUES ('$user_id','$product_id', '$total_ltr', '$start_date', '$end_date', '$created_at')";
+            $sql = "INSERT INTO extra_milk_orders (`user_id`, `product_id`, `total_ltr`, `extra_ltr`, `order_date`, `created_at`) VALUES ('$user_id','$product_id', '$total_ltr','$extra_ltr', STR_TO_DATE('$order_date', '%m/%d/%Y'), '$created_at')";
             if($conn->query($sql) === TRUE){
-               echo "<script>alert('Data Updated Successfully');window.location.href='weight.php';</script>";
+               echo "<script>alert('Data Updated Successfully');window.location.href='extra_milk_orders.php';</script>";
             } else {
-               echo "<script>alert('Data Updation Failed');window.location.href='weight.php';</script>";
+               echo "<script>alert('Data Updation Failed');window.location.href='extra_milk_orders.php';</script>";
             }
             
         }
@@ -39,7 +39,7 @@
                                       $getProductData = getAllDataCheckActive('products','0'); 
                                  ?>
                                 <div class="input-field col s12">
-                                    <select name="user_id" required>
+                                    <select name="user_id" required class="get_total_milk_ltrs">
                                         <option value="" disabled selected>Select Users</option>
                                         <?php while($row = $getUserData->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['user_name']; ?></option>
@@ -57,8 +57,8 @@
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="total_ltr" type="text" class="validate" name="total_ltr" required>
-                                    <label for="total_ltr">Total Ltrs</label>
+                                    <input id="total_ltr" type="text" class="validate" name="total_ltr" required readonly=readonly placeholder="Total Ltrs">
+                                    
                                 </div>
 
                                 <div class="input-field col s12">
@@ -69,15 +69,7 @@
                                 <div class="input-field col s12">
                                     <label for="order_date">Order Date</label>
                                     <input id="order_date" name="order_date" type="text" class="datepicker">
-                                </div>                                                             
-                                
-                                <!-- <div class="input-field col s12">
-                                    <select name="status" required>
-                                        <option value="" disabled selected>Choose your status</option>
-                                        <option value="0">Active</option>
-                                        <option value="1">In Active</option>                                        
-                                    </select>                                    
-                                </div > -->
+                                </div>
                                 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">
@@ -94,3 +86,24 @@
     </div>
 </main>
 <?php include_once 'footer.php'; ?>
+<script type="text/javascript">
+    $('.get_total_milk_ltrs').change(function() {
+        var selectUserId = $(this).val();
+        if(selectUserId != '') {
+            $.ajax({
+                type: 'POST',
+                url: 'get_total_milkltr.php',
+                dataType: 'json',
+                data: { 'user_id' : selectUserId },
+                success : function(result){
+                    if(result!=0){
+                        $('#total_ltr').val(result);
+                    } else {
+                        alert("Please Select Valid User");
+                        $('#total_ltr').val('');
+                    }
+                }
+            });
+        }
+    });
+</script>

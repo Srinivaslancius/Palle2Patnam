@@ -83,7 +83,7 @@
                 </div>
             </main>
          <?php include_once 'footer.php'; ?>         
-         <!-- model pop-up Script for all pages with bootstrap js -->        
+        <!-- model pop-up Script for all pages with bootstrap js -->        
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){

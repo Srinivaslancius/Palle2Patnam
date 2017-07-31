@@ -106,10 +106,16 @@
 <?php include_once 'footer.php'; ?>
 <script type="text/javascript">
 $('#price_ltr').on('keyup', function(){
-    var total = 0.00;
-    var total_ltr = parseInt($('#total_ltr').val());
-    var price_ltr = parseInt($('#price_ltr').val());
-    total += parseFloat(price_ltr*total_ltr);
-    textbox3= $("#total_ltr_price").val((total).toFixed(2));
+    if($('#total_ltr').val()!='') {
+        var total = 0.00;
+        var total_ltr = parseInt($('#total_ltr').val());
+        var price_ltr = parseInt($('#price_ltr').val());
+        total += parseFloat(price_ltr*total_ltr);
+        textbox3= $("#total_ltr_price").val((total).toFixed(2));
+    } else {
+        alert("Please Enter total Ltrs");
+        $('#price_ltr').val('');
+        $('#total_ltr_price').val('');
+    }
 });
 </script>

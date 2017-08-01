@@ -16,10 +16,14 @@ $(document).ready(function() {
     });
     //Filters for country Satate and city
     $('#select-category').on('change', function () {
-        table.columns(1).search( this.value ).draw();
+        table.columns(2).search( this.value ).draw();
+    } );
+    $('#select-vendor').on('change', function () {
+        table.columns(0).search( this.value ).draw();
     } );
    
     $('.dataTables_length select').addClass('browser-default');
+
 });
 
 $(function() {

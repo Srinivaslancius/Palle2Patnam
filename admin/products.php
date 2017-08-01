@@ -29,11 +29,11 @@
                         <div class="col s12 m12 l12 checkbox_new_div" style="position: relative; top: 9px; text-align:center ;">
                             <p class="p-v-xs col s4">
                                 <input id="test5" onchange="filterme()" type="checkbox" name="type" value="Active">
-                                <label for="test5">Verified Products</label>
+                                <label for="test5">Active Products</label>
                             </p>
                             <p class="p-v-xs col s4">
                                 <input id="test6" onchange="filterme()" type="checkbox" name="type" value="In Active">
-                                <label for="test6">Non Verified Products</label>
+                                <label for="test6">InActive Products</label>
                             </p>                                        
                         </div>
                         

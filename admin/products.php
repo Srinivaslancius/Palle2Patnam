@@ -107,8 +107,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
+
     </main>
  <?php include_once 'footer.php'; ?>         
  <!-- model pop-up Script for all pages with bootstrap js -->        
@@ -121,3 +120,4 @@
         });                  
     });
 </script>
+

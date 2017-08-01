@@ -26,6 +26,17 @@
                             </div>
                         </div>
 
+                        <div class="col s12 m12 l12 checkbox_new_div" style="position: relative; top: 9px; text-align:center ;">
+                            <p class="p-v-xs col s4">
+                                <input id="test5" onchange="filterme()" type="checkbox" name="type" value="Active">
+                                <label for="test5">Verified Products</label>
+                            </p>
+                            <p class="p-v-xs col s4">
+                                <input id="test6" onchange="filterme()" type="checkbox" name="type" value="In Active">
+                                <label for="test6">Non Verified Products</label>
+                            </p>                                        
+                        </div>
+                        
                         <?php $getData = getAllDataWithActiveRecent('products'); $i=1; ?>
                         <table id="example" class="display responsive-table datatable-example">
                             <thead>
@@ -81,7 +92,7 @@
                                                     
                                                     <h5 class="modal-title-set"><b>Avalabilty: </b><?php if($row['category_id']==0) { echo "InStock"; } else { echo "Outof Stock"; } ?></h5>
 
-                                                    <h5 class="modal-title-set"><b>Status :</b><?php if($row['status'] == 0){ echo "Active";}else{ echo "In Active";}?></h5>
+                                                    <h5 class="modal-title-set"><b>Status :</b><?php if($row['status'] == 0){ echo "Active";}else{ echo "InActive";}?></h5>
                                                 </div>
                                                 <div class="modal-footer" >
                                                       <button type="button" class="btn" data-dismiss="modal" style="background-color:#f00; color:#fff">Close</button>

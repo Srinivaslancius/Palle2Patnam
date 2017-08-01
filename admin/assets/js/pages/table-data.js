@@ -21,3 +21,15 @@ $(document).ready(function() {
    
     $('.dataTables_length select').addClass('browser-default');
 });
+
+$(function() {
+  otable = $('#example').dataTable();
+})
+function filterme() {
+  //build a regex filter string with an or(|) condition
+  var types = $('input:checkbox[name="type"]:checked').map(function() {
+    return '^' + this.value + '\$';
+  }).get().join('|');
+  //filter in column 0, with an regex, no smart filtering, no inputbox,not case sensitive
+  otable.fnFilter(types, 3, true, false, false, false);  
+}

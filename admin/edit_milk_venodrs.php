@@ -11,7 +11,7 @@ $id = $_GET['id'];
     $milk_in_ltrs  = $_POST['milk_in_ltrs'];
     $created_date = date("Y-m-d h:i:s");
   
-        $sql = "UPDATE vendor_milk_assign SET vendor_id = '$vendor_id',milk_in_ltrs = '$milk_in_ltrs',created_date = '$created_date'";
+        $sql = "UPDATE vendor_milk_assign SET vendor_id = '$vendor_id',milk_in_ltrs = '$milk_in_ltrs',created_date = '$created_date' WHERE id='$id'";
         if($conn->query($sql) === TRUE) {
                 echo "<script>alert('Data Updated Successfully');window.location.href='milk_vendors.php';</script>";
         }else {

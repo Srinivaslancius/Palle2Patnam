@@ -6,14 +6,10 @@ $id = $_GET['pid'];
 if (!isset($_POST['submit']))  {
             echo "";
 } else  {
-    //echo "<pre>"; print_r($_POST); die;
+    
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-    //$price = $_POST['price'];
-    //$special_price = $_POST['special_price'];
-    //$discount_percentage = $_POST['discount_percentage'];
-    //$weight_type_id = $_POST['weight_type_id'];
     $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
     $about = $_POST['about'];

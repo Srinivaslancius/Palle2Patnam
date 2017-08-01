@@ -208,8 +208,8 @@ function addInput(divName) {
     var newDiv = document.createElement('div');
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
-    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ><label for='price'>Price</label></div>";
+    selectHTML="<div class='input-field col s4'><select required name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' required name='price[]' ><label for='price'>Price</label></div>";
     removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
@@ -262,7 +262,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="file" name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
         }
     });
    

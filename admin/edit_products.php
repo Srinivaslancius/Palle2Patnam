@@ -100,7 +100,7 @@ if (!isset($_POST['submit']))  {
                                     <?php while($row2 = $result2->fetch_assoc()) { ?>
                                         <div class="input-field col s6">
                                             <?php $result = getAllData('product_weights'); ?>                                                
-                                            <select name="weight_type_id[]">
+                                            <select name="weight_type_id[]" required>
                                                 <?php while($row = $result->fetch_assoc()) { ?>
                                                 <?php $getTermName = getIndividualDetails($row2['weight_type_id'],'product_weights','id'); ?>
                                                     <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $row2['weight_type_id']) { echo "Selected"; } ?>><?php echo $row['weight_type']; ?></option>
@@ -108,7 +108,7 @@ if (!isset($_POST['submit']))  {
                                             </select>  
                                         </div>
                                         <div class="input-field col s6">
-                                           <input type="text" name="price[]" value="<?php echo $row2['price']; ?>"/>
+                                           <input type="text" name="price[]" required value="<?php echo $row2['price']; ?>"/>
                                            <label for="price">Price</label>
                                         </div>
                                     <?php } ?>
@@ -156,13 +156,12 @@ if (!isset($_POST['submit']))  {
                                         echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
                                     }                               
                                    ?>
-                                   <!--<a href="#"><i class="small material-icons">delete</i></a>-->
                                 </div>
 
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
                                     <div class="input_fields_wrap">                                        
-                                        <div><input type="file" name="product_images[]" requird> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                        <div><input type="file" name="product_images[]" required> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
                                     </div>
                                 </div>
 

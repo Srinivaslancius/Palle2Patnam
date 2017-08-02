@@ -32,7 +32,7 @@
                             <div class="row">
 
                                 <div class="input-field col s12">
-                                    <input id="weight_type" type="text" class="validate" name="weight_type" required>
+                                    <input id="weight_type" type="text" class="validate" name="weight_type" autofocus="autofocus" required>
                                     <label for="weight_type">Weight Type</label>
                                 </div>
                                 

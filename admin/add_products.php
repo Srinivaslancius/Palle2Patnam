@@ -89,7 +89,7 @@ if (!isset($_POST['submit']))  {
                                         </select> 
                                     </div>
                                     <div class="input-field col s4">
-                                       <input id="price" type="text" class="validate" name="price[]" required>
+                                       <input id="price" type="text" class="validate" name="price[]" required onkeypress="return isNumberKey(event)">
                                        <label for="price">Price</label>
                                     </div>
                                     <div class="input-field col s4">
@@ -218,4 +218,11 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+//Script allowed only numeric value
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+} 
 </script>

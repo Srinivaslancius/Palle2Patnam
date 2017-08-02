@@ -1,7 +1,8 @@
 <?php include_once 'main_header.php'; ?>
            
 <?php include_once 'side_navigation.php';?>
-<?php  
+<?php 
+error_reporting(0); 
 $id = $_GET['uid'];
  if (!isset($_POST['submit']))  {
             echo "";
@@ -35,15 +36,15 @@ $id = $_GET['uid'];
                                     <?php $getAdminUsers = getAllDataWhere('admin_users', 'id', $id); $getAdminUsers1 = $getAdminUsers->fetch_assoc(); ?>
                                     <div class="input-field col s6">
                                         <input id="admin_name" type="text" class="validate" name="admin_name" required value="<?php echo $getAdminUsers1['admin_name'];?>">
-                                        <label for="admin_name">Admin Name</label>
+                                        <label for="admin_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_email" type="email" class="validate" name="admin_email" required value="<?php echo $getAdminUsers1['admin_email'];?>">
-                                        <label for="admin_email">Admin Email</label>
+                                        <label for="admin_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="admin_password" type="password" class="validate" name="admin_password" required value="<?php echo $getAdminUsers1['admin_password'];?>">
-                                        <label for="admin_password">Admin Password</label>
+                                        <input id="admin_password" type="password" class="validate" name="admin_password" required value="<?php echo decryptPassword($getAdminUsers1['admin_password']);?>">
+                                        <label for="admin_password">Password</label>
                                     </div>
 
                                 </div>

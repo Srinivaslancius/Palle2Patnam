@@ -108,7 +108,7 @@ if (!isset($_POST['submit']))  {
                                             </select>  
                                         </div>
                                         <div class="input-field col s6">
-                                           <input type="text" name="price[]" required value="<?php echo $row2['price']; ?>"/>
+                                           <input type="text" name="price[]" required onkeypress="return isNumberKey(event)" value="<?php echo $row2['price']; ?>"/>
                                            <label for="price">Price</label>
                                         </div>
                                     <?php } ?>
@@ -160,8 +160,14 @@ if (!isset($_POST['submit']))  {
 
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
-                                    <div class="input_fields_wrap">                                        
-                                        <div><input type="file" name="product_images[]" required> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                    <div class="input_fields_wrap">
+                                        <div>
+                                        <?php if($getImages->num_rows > 0){ ?>
+                                            <input type="file" name="product_images[]" accept="image/*">
+                                        <?php } else { ?>
+                                            <input type="file" name="product_images[]" accept="image/*" required >
+                                        <?php } ?>
+                                        <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
                                     </div>
                                 </div>
 
@@ -270,4 +276,11 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+//Script allowed only numeric value
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
 </script>

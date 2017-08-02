@@ -24,7 +24,7 @@
     <body class="signup-page">
         
         <div class="mn-content fixed-sidebar">
-            <header class="mn-header navbar-fixed">
+            <header class="mn-header navbar-fixed" style="margin-top:70px">
                 <?php //include_once'header.php';?>
             </header>
 
@@ -32,7 +32,7 @@
              <main class="mn-inner container ">
                 <div class="valign">
                       <div class="row">
-                          <div class="col s12 m6 l4 offset-l4 offset-m3">
+                          <div class="col s12 m6 l4 offset-l4 offset-m3" style="margin-left:25.333%">
                               <div class="card white darken-1">
                                   <div class="card-content ">
                                       <span class="card-title">Login</span>
@@ -40,7 +40,7 @@
                                            <form class="col s12" autocomplete="off" method="post" action="login-script.php">
                                               
                                                <div class="input-field col s12">
-                                                   <input id="email" type="email" class="validate" required name="admin_email">
+                                                   <input id="email" type="email" class="validate" autofocus required name="admin_email">
                                                    <label for="email">Email</label>
                                                </div>
                                                <div class="input-field col s12">

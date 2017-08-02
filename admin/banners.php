@@ -24,7 +24,7 @@
                                         <tr>
                                             <td><?php echo $row['title'];?></td>
                                             <td><img src="<?php echo $base_url . 'uploads/banner_images/'.$row['banner'] ?>" height="100" width="100"/></td>                        
-                                            <td><a href="edit_banners.php?bid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a><a href="delete_banners.php?bid=<?php echo $row['id']; ?>"><i class="material-icons dp48">delete</i></a></td>
+                                            <td><a href="edit_banners.php?bid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">visibility</i></a><a href="delete_banners.php?bid=<?php echo $row['id']; ?>"><i class="material-icons dp48" onclick="return confirm('Are you absolutely sure you want to delete?')">delete</i></a></td>
                                         <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
                                             <div class="modal-dialog" Style="margin-top:10%;">
                                                 <div class="modal-content">

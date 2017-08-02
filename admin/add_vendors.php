@@ -33,7 +33,7 @@
                             <div class="row">
 
                                 <div class="input-field col s12">
-                                    <input id="vendor_name" type="text" class="validate" name="vendor_name" required>
+                                    <input id="vendor_name" type="text" class="validate" name="vendor_name" autofocus="autofocus" required>
                                     <label for="vendor_name">Vendor Name</label>
                                 </div>
                                 

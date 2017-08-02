@@ -1,7 +1,8 @@
 <?php include_once 'main_header.php'; ?>
            
 <?php include_once 'side_navigation.php';?>
-<?php  
+<?php
+error_reporting(0);  
 if (!isset($_POST['submit']))  {
             echo "";
         } else  { 
@@ -32,16 +33,16 @@ if (!isset($_POST['submit']))  {
                                 <div class="row">
                                     
                                     <div class="input-field col s6">
-                                        <input id="admin_name" type="text" class="validate" name="admin_name" required>
-                                        <label for="admin_name">Admin Name</label>
+                                        <input id="admin_name" type="text" autofocus class="validate" name="admin_name" required>
+                                        <label for="admin_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_email" type="email" class="validate" name="admin_email" required>
-                                        <label for="admin_email">Admin Email</label>
+                                        <label for="admin_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_password" type="password" class="validate" name="admin_password" required>
-                                        <label for="admin_password">Admin Password</label>
+                                        <label for="admin_password">Password</label>
                                     </div>
 
                                 </div>

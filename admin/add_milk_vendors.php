@@ -38,7 +38,7 @@ if (!isset($_POST['submit']))  {
                                 ?>
                                 <div class="input-field col s12">
                                     <select name="vendor_id" required>
-                                        <option value="">Milk Vendors</option>
+                                        <option value="">Vendor Names</option>
                                         <?php while($row = $getVendors->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['vendor_name']; ?></option>
                                         <?php } ?>

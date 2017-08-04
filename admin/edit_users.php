@@ -42,15 +42,15 @@ $id = $_GET['uid'];
                                 <?php $getUsers = getAllDataWhere('users', 'id', $id); $getUsers1 = $getUsers->fetch_assoc(); ?>                                    
                                     <div class="input-field col s6">
                                         <input id="user_name" type="text" class="validate" name="user_name" required value="<?php echo $getUsers1['user_name'];?>">
-                                        <label for="user_name">User Name</label>
+                                        <label for="user_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="user_email" type="email" class="validate" name="user_email" value="<?php echo $getUsers1['user_email'];?>">
-                                        <label for="user_email">User Email(Optional)</label>
+                                        <label for="user_email">Email(Optional)</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_mobile" type="text" class="validate" name="user_mobile" required value="<?php echo $getUsers1['user_mobile'];?>">
-                                        <label for="user_mobile">User Mobile</label>
+                                        <input id="user_mobile" type="text" class="validate" name="user_mobile" required maxlength="10"  pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" value="<?php echo $getUsers1['user_mobile'];?>">
+                                        <label for="user_mobile">Mobile</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="street_name" type="text" class="validate" name="street_name" required value="<?php echo $getUsers1['street_name'];?>">
@@ -106,3 +106,12 @@ $id = $_GET['uid'];
     </div>
 </main>
 <?php include_once 'footer.php'; ?>
+<!--Script allowed only numeric value-->
+<script type="text/javascript">
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>

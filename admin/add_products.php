@@ -89,7 +89,7 @@ if (!isset($_POST['submit']))  {
                                         </select> 
                                     </div>
                                     <div class="input-field col s4">
-                                       <input id="price" type="text" class="validate" name="price[]" required>
+                                       <input id="price" type="text" class="validate" name="price[]" required onkeypress="return isNumberKey(event)">
                                        <label for="price">Price</label>
                                     </div>
                                     <div class="input-field col s4">
@@ -108,14 +108,14 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                         <span for="name" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea name="product_info" required id="product_info"></textarea>                                        
+                                            <textarea id="product_info" name="product_info" required></textarea>                                        
                                         </div>
                                 </div>  
                                 
                                 <div class="input-field col s12">
                                         <span for="name" class="col-lg-3 col-sm-3 control-label">About</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea name="about" required id="about"></textarea>
+                                            <textarea id="about" name="about" required></textarea>
                                         </div>
                                 </div>
                                     
@@ -130,7 +130,7 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
                                     <div class="input_fields_wrap">                                        
-                                        <div><input type="file" name="product_images[]" requird> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                        <div><input type="file" name="product_images[]" required> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
                                     </div>
 
                                 </div>
@@ -178,8 +178,8 @@ function addInput(divName) {
     var newDiv = document.createElement('div');
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
-    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ><label for='price'>Price</label></div>";
+    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' required style='display:block !important'><option value=''>Select Weighy Type</option>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' required name='price[]' ><label for='price'>Price</label></div>";
     removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
@@ -210,7 +210,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="file" name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
         }
     });
    
@@ -218,4 +218,11 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+//Script allowed only numeric value
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+} 
 </script>

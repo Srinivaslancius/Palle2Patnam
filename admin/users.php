@@ -29,7 +29,7 @@
                                             <td><?php echo $row['user_email'];?></td>
                                             <td><?php echo $row['user_mobile'];?></td>
                                             <td><?php echo $row['location'];?></td>
-                                            <td><a href="edit_users.php?uid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a href="#"><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a></td>
+                                            <td><a href="edit_users.php?uid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a href="#"><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">visibility</i></a></td>
                                             <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
                                                 <div class="modal-dialog" Style="margin-top:10%;">
                                                     <div class="modal-content">

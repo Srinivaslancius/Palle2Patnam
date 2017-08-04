@@ -67,7 +67,7 @@
                     </li>
 
                     <li class="no-padding">
-                        <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'milk_order_reports.php' || $page_name == 'monthly_milk_orders.php' || $page_name == 'yearly_milk_orders.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Milk Order Reports <i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+                        <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'milk_order_reports.php' || $page_name == 'monthly_milk_orders.php' || $page_name == 'yearly_milk_orders.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Milk Order Reports <i style="position: absolute;" class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                         <div class="collapsible-body">
                             <ul>                               
                                <li><a href="milk_order_reports.php">Milk Reports</a></li>                               

@@ -68,7 +68,8 @@
                                 </div>
                                 
                                 <div class="input-field col s6">
-                                   Image : <input type="file" name="category_image" id="category_image" required>                                     
+                                    <img id="img-preview"/>
+                                   Image : <input type="file" name="category_image" id="category_image" accept="image/*" onchange="imgPreview(this);" required>                                     
                                 </div>
 
                                 <div class="input-field col s12">

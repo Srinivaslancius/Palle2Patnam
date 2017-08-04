@@ -84,7 +84,7 @@
                                                     $sql = "SELECT id,weight_type FROM product_weights where id = '$getId'";
                                                     $result = $conn->query($sql);
                                                     while($row=$result->fetch_assoc()){
-                                                         $getTermName = getIndividualDetails($row['id'],'product_weights','id'); 
+                                                         $getTermName = getIndividualDetails($getId,'product_weights','id'); 
                                                         echo strip_tags($row['weight_type']);
                                                     }
                                                     ?>
@@ -110,14 +110,5 @@
 
     </main>
  <?php include_once 'footer.php'; ?>         
- <!-- model pop-up Script for all pages with bootstrap js -->        
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".click_view").click(function(){
-            var modalId = $(this).attr('data-modalId');
-            $("#myModal_"+modalId).modal('show');  
-        });                  
-    });
-</script>
+ 
 

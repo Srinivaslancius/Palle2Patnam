@@ -56,13 +56,13 @@ if (!isset($_POST['submit']))  {
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
             <div class="card">
-                <div class="card-content">                                
+                <div class="card-content">
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
                                
                                 <?php
-                                    $getCategories = getAllDataCheckActive('categories',0);                             
+                                    $getCategories = getAllDataCheckActive('categories',0);
                                     $getWeights = getAllDataCheckActive('product_weights',0);
                                 ?>
                                 <div class="input-field col s12">
@@ -85,7 +85,7 @@ if (!isset($_POST['submit']))  {
                                             <option value="">Select Weighy Type</option>
                                             <?php while($row = $getWeights->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
-                                            <?php } ?>                                      
+                                            <?php } ?>
                                         </select> 
                                     </div>
                                     <div class="input-field col s4">
@@ -93,7 +93,7 @@ if (!isset($_POST['submit']))  {
                                        <label for="price">Price</label>
                                     </div>
                                     <div class="input-field col s4">
-                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onclick="addInput('dynamicInput');" /></a>
+                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onkeypress="return isNumberKey(event)" onclick="addInput('dynamicInput');"/></a>
                                     </div>
                                     <div id="dynamicInput" class="input-field col s12"></div>
                                 </div>
@@ -101,14 +101,14 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                         <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea id="key_features" name="key_features" required></textarea>                                        
+                                            <textarea id="key_features" name="key_features" required></textarea>
                                         </div>
                                 </div>
                                         
                                 <div class="input-field col s12">
                                         <span for="name" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea id="product_info" name="product_info" required></textarea>                                        
+                                            <textarea id="product_info" name="product_info" required></textarea>
                                         </div>
                                 </div>  
                                 
@@ -123,25 +123,28 @@ if (!isset($_POST['submit']))  {
                                     <select name="availability_id" required>
                                         <option value="" disabled selected>Avalability</option>
                                         <option value="0">In Stock</option>
-                                        <option value="1">Out Of Stock</option>                                        
+                                        <option value="1">Out Of Stock</option>
                                     </select> 
                                 </div>
 
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
-                                    <div class="input_fields_wrap">                                        
-                                        <div><input type="file" name="product_images[]" required> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                    <div class="input_fields_wrap">
+                                        <div>
+                                            <img id="img-preview"/>
+                                            <input type="file" id="product_images" name="product_images[]" accept="image/*" onchange="imgPreview(this);" required>
+                                            <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a>
+                                        </div><br/>
                                     </div>
-
                                 </div>
 
                                 <div class="input-field col s12">
                                     <select name="status" required>
                                         <option value="" disabled selected>Choose your status</option>
                                         <option value="0">Active</option>
-                                        <option value="1">In Active</option>                                        
-                                    </select>                                    
-                                </div>                                
+                                        <option value="1">In Active</option>
+                                    </select>
+                                </div>
                                 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">
@@ -162,7 +165,7 @@ if (!isset($_POST['submit']))  {
 
 <?php
     $sql1 = "SELECT * FROM product_weights where status = '0'";
-    $result1 = $conn->query($sql1);                                    
+    $result1 = $conn->query($sql1);
 ?>
 
 <?php while($row = $result1->fetch_assoc()) { 
@@ -174,12 +177,12 @@ if (!isset($_POST['submit']))  {
 
 function addInput(divName) {
     var choices = <?php echo json_encode($choices1); ?>; 
-    var choices_names = <?php echo json_encode($choices_names); ?>;      
+    var choices_names = <?php echo json_encode($choices_names); ?>;
     var newDiv = document.createElement('div');
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
     selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' required style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' required name='price[]' ><label for='price'>Price</label></div>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' required name='price[]' onkeypress='return isNumberKey(event)''><label for='price'>Price</label></div>";
     removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
@@ -194,35 +197,40 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).parent().parent().remove();
     })
-});
-
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-   
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+    //Script for Multilpe Images Preview
+    var abc = 0;
+    $('#add_more').click(function () {
+        $(this).before("<div><input type='file' id='file' name='product_images[]' accept='image/*' required><a href='#' class='remove_field'>Remove</a> </div>");
+    });
+    $('body').on('change', '#file', function () {
+        if (this.files && this.files[0])
+        {
+            abc += 1; //increementing global variable by 1
+            var z = abc - 1;
+            var x = $(this).parent().find('#previewimg' + z).remove();
+            $(this).before("<div><img id='previewimg" + abc + "' src='' width='150' height='150'/></div>");
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
         }
     });
-   
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        //image preview
+    function imageIsLoaded(e) {
+        $('#previewimg' + abc).attr('src', e.target.result);
+    };
+    $(this).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+//Multilpe Images Preview script end here
+
 //Script allowed only numeric value
 function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
-} 
+}
 </script>
+
+   

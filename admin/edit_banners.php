@@ -69,12 +69,12 @@ $id = $_GET['bid'];
                                 <div class="form-group">
                                     <label for="name" class="col-lg-3 col-sm-3 control-label"></label>
                                     <div class="col-lg-9">
-                                        <img src="<?php echo $base_url . 'uploads/banner_images/'.$getBanners1['banner'] ?>" height="200" width="200"/>
+                                        <img id="img-preview" src="<?php echo $base_url . 'uploads/banner_images/'.$getBanners1['banner'] ?>" height="200" width="200"/>
                                     </div>
                                 </div> 
                                 
                                 <div class="input-field col s6">
-                                   Banner : <input type="file" name="fileToUpload" id="fileToUpload">                                     
+                                   Banner : <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="imgPreview(this);">                                     
                                 </div>
 
                                 <div class="input-field col s12">

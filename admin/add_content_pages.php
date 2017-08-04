@@ -40,11 +40,10 @@
                                 <div class="input-field col s12">
                                         <span for="description" class="col-lg-3 col-sm-3 control-label">Description</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea id="description" name="description" required></textarea>                                        
+                                            <textarea id="description" name="description" required></textarea>
                                         </div>
                                 </div>             
                                 
-
                                 <div class="input-field col s12">
                                     <select name="status" required>
                                         <option value="" disabled selected>Choose your status</option>

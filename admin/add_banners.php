@@ -5,10 +5,9 @@
             echo "";
         } else  {
 
-
-            $title = $_POST['title'];                                    
+            $title = $_POST['title'];
             $fileToUpload = $_FILES["fileToUpload"]["name"];
-            $status = $_POST['status'];                                                    
+            $status = $_POST['status'];
             
             if($fileToUpload!='') {
 
@@ -45,7 +44,7 @@
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
             <div class="card">
-                <div class="card-content">                                
+                <div class="card-content">
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -56,16 +55,17 @@
                                 </div>
                                 
                                 <div class="input-field col s6">
-                                   Image : <input type="file" name="fileToUpload" id="fileToUpload" required>                                     
+                                    <img id="img-preview"/>
+                                    <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="imgPreview(this);" required>
                                 </div>
 
                                 <div class="input-field col s12">
                                     <select name="status" required>
                                         <option value="" disabled selected>Choose your status</option>
                                         <option value="0">Active</option>
-                                        <option value="1">In Active</option>                                        
-                                    </select>                                    
-                                </div>                            
+                                        <option value="1">In Active</option>
+                                    </select>
+                                </div>
                                 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">
@@ -82,3 +82,4 @@
     </div>
 </main>
 <?php include_once 'footer.php'; ?>
+

@@ -53,7 +53,6 @@
                                     <input id="title" type="text" class="validate" name="title" autofocus="autofocus" required>
                                     <label for="title">Title</label>
                                 </div>
-                                
                                 <div class="input-field col s6">
                                     <img id="img-preview"/>
                                     <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="imgPreview(this);" required>

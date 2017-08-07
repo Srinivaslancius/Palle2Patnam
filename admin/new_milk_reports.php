@@ -16,15 +16,15 @@ if(isset($_POST['search']) && $_POST['search']!='' ) {
   $to_change_format   =  date("Y-m-d", strtotime($end_date));  
 
   if(isset($user_id) && $user_id!='' && isset($start_date) && $start_date!='' && isset($end_date) && $end_date!='' ) { 
-    $statement = "`$table` WHERE `user_id` = '$user_id' AND DATE_FORMAT(start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY `id` desc";
+    $statement = "`$table` WHERE `user_id` = '$user_id' AND DATE_FORMAT(start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY `start_date` desc";
     //echo "SELECT * FROM {$statement} "; 
     $getData = $conn->query("SELECT * FROM {$statement} ");
   } elseif(isset($start_date) && $start_date!='' && isset($end_date) && $end_date!='' ) { 
-    $statement = "`$table` WHERE DATE_FORMAT(start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY `id` desc";
+    $statement = "`$table` WHERE DATE_FORMAT(start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY `start_date` desc";
     //echo "SELECT * FROM {$statement} "; 
     $getData = $conn->query("SELECT * FROM {$statement} ");
   } elseif(isset($start_date) && $start_date!='' && isset($user_id) && $user_id!='' ) { 
-    $statement = "`$table` WHERE `user_id` = '$user_id' AND DATE_FORMAT(start_date,'%Y-%m-%d') = '$from_change_format' ORDER BY `id` desc";
+    $statement = "`$table` WHERE `user_id` = '$user_id' AND DATE_FORMAT(start_date,'%Y-%m-%d') = '$from_change_format' ORDER BY `start_date` desc";
     //echo "SELECT * FROM {$statement} "; 
     $getData = $conn->query("SELECT * FROM {$statement} ");
   } elseif(isset($user_id) && $user_id!='') {
@@ -33,11 +33,11 @@ if(isset($_POST['search']) && $_POST['search']!='' ) {
     $getData = $conn->query("SELECT * FROM {$statement} ");      
 
   } elseif(isset($start_date) && $start_date!='' ) {
-    $statement = "`$table` WHERE DATE_FORMAT(start_date,'%Y-%m-%d') = '$from_change_format' ORDER BY `id` desc";
+    $statement = "`$table` WHERE DATE_FORMAT(start_date,'%Y-%m-%d') = '$from_change_format' ORDER BY `start_date` desc";
     //echo "SELECT * FROM {$statement} "; 
     $getData = $conn->query("SELECT * FROM {$statement} ");   
   } elseif(isset($end_date) && $end_date!='' ) {
-    $statement = "`$table` WHERE DATE_FORMAT(start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY `id` desc";
+    $statement = "`$table` WHERE DATE_FORMAT(start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY `start_date` desc";
     //echo "SELECT * FROM {$statement} "; 
     $getData = $conn->query("SELECT * FROM {$statement} ");   
   } else {
@@ -91,6 +91,8 @@ tr:nth-child(even) {
 
         <input type="submit" name="search" value="Search">
         <input type="submit" name="reset" value="Reset" id="reset">
+
+        
     </form>
     </div>
 
@@ -104,17 +106,20 @@ tr:nth-child(even) {
     <th>End Date</th>
     <th>Print</th>
   </tr>
-  <?php while ($row = $getData->fetch_assoc()) { ?>
+  <?php $user_id = array(); 
+        while ($row = $getData->fetch_assoc()) { 
+        $user_id[] = serialize($row['user_id']);
+  ?>
   <tr id="example">
     <td><?php $getUserName = getIndividualDetails($row['user_id'],'users','id'); echo $getUserName['user_name']; ?></td>
     <!-- <td><?php echo $row['total_ltr']; ?></td> -->
     <td><?php echo $row['start_date']; ?></td>
     <td><?php echo $row['end_date']; ?></td>
-    <td><a href="">View</a> &nbsp;&nbsp; <a href="generate_pdf.php?uid=<?php echo $row['user_id']; ?>" target="_blank">Print</a></td>
+    <td><a href="">View</a> &nbsp;&nbsp; <a href="TCPDF/examples/example_048.php?uid=<?php echo $row['user_id']; ?>" target="_blank">Print</a></td>
   </tr>
  <?php } ?>
 </table>
-
+<a href="TCPDF/examples/monthly_pdf_reports.php?user_ids=<?php echo $user_id; ?>" target="_blank">Generate Reports</a>
 </body>
 </html>
   <script>
@@ -122,11 +127,4 @@ tr:nth-child(even) {
     $( "#end_date , #start_date" ).datepicker();
   } );
   </script>
-  <script type='text/javascript'>
-        var options = {
-            currentPage: 3,
-            totalPages: 10
-        }
-
-        $('#example').bootstrapPaginator(options);
-    </script>
+  

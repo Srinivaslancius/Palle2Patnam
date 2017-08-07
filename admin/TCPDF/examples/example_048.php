@@ -75,7 +75,7 @@ $price = 0;
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 include_once('../../includes/functions.php');
-$uid = 4;
+$uid = $_GET['uid'];
 
 $sql = "SELECT milk_orders.id,milk_orders.total_ltr as total_ltrs,milk_orders.user_id, extra_milk_orders.extra_ltr, extra_milk_orders.order_date, milk_orders.start_date, milk_orders.end_date,users.user_name,users.id FROM milk_orders LEFT JOIN extra_milk_orders ON milk_orders.user_id=extra_milk_orders.user_id LEFT JOIN users ON users.id=milk_orders.user_id WHERE milk_orders.user_id = $uid AND DATE_FORMAT(order_date,'%Y-%m-%d') between milk_orders.start_date AND milk_orders.end_date ";
 $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));

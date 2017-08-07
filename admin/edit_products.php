@@ -164,6 +164,7 @@ if (!isset($_POST['submit']))  {
                                         <?php if($getImages->num_rows > 0){ ?>
                                             <input type="file" name="product_images[]" onchange="imgPreview(this);" accept="image/*">
                                         <?php } else { ?>
+                                            <img id='img-preview'/>
                                             <input type="file" name="product_images[]" onchange="imgPreview(this);" accept="image/*" required >
                                         <?php } ?>
                                         <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a>

@@ -84,7 +84,7 @@
                                                     $sql = "SELECT id,weight_type FROM product_weights where id = '$getId'";
                                                     $result = $conn->query($sql);
                                                     while($row=$result->fetch_assoc()){
-                                                         $getTermName = getIndividualDetails($getId,'product_weights','id'); 
+                                                         $getTermName = getIndividualDetails($row['id'],'product_weights','id'); 
                                                         echo strip_tags($row['weight_type']);
                                                     }
                                                     ?>

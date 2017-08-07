@@ -39,7 +39,6 @@ if (!isset($_POST['submit']))  {
         $result = $conn->query($sql);
     }
 
-
     $product_images = $_FILES['product_images']['name'];
     foreach($product_images as $key=>$value){
 
@@ -90,11 +89,11 @@ if (!isset($_POST['submit']))  {
                                             <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['category_id']) { echo "selected=selected"; }?> ><?php echo $row['category_name']; ?></option>
                                         <?php } ?>
                                     </select> 
-                                </div>                                
+                                </div>
 
                                 <?php
                                     $sql2 = "SELECT * FROM product_weight_prices where product_id = '$id'";
-                                    $result2 = $conn->query($sql2);                                    
+                                    $result2 = $conn->query($sql2);
                                 ?>
                                 <div>
                                     <?php while($row2 = $result2->fetch_assoc()) { ?>
@@ -114,7 +113,7 @@ if (!isset($_POST['submit']))  {
                                     <?php } ?>
 
                                     <div class="input-field col s4">
-                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onclick="addInput('dynamicInput');" /></a>
+                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onkeypress="return isNumberKey(event)" onclick="addInput('dynamicInput');" /></a>
                                     </div>
                                     <div id="dynamicInput" class="input-field col s12"></div>
                                 
@@ -122,14 +121,14 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
                                     <div class="col-lg-9">
-                                        <textarea id="key_features" name="key_features" required value="<?php echo $getAllProductsData['key_features']; ?>"><?php echo $getAllProductsData['key_features']; ?></textarea>                                        
+                                        <textarea id="key_features" name="key_features" required value="<?php echo $getAllProductsData['key_features']; ?>"><?php echo $getAllProductsData['key_features']; ?></textarea>
                                     </div>
                                 </div>
 
                                 <div class="input-field col s12">
                                     <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                     <div class="col-lg-9">
-                                        <textarea name="product_info"required id="product_info"><?php echo $getAllProductsData['product_info']; ?></textarea>                                        
+                                        <textarea name="product_info"required id="product_info"><?php echo $getAllProductsData['product_info']; ?></textarea>
                                     </div>
                                 </div>  
 
@@ -153,7 +152,7 @@ if (!isset($_POST['submit']))  {
                                     $sql = "SELECT id,product_image FROM product_images where product_id = $id";
                                     $getImages= $conn->query($sql);                                                             
                                     while($row=$getImages->fetch_assoc()) {
-                                        echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
+                                        echo "<img id='img-preview' src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
                                     }                               
                                    ?>
                                 </div>
@@ -163,11 +162,12 @@ if (!isset($_POST['submit']))  {
                                     <div class="input_fields_wrap">
                                         <div>
                                         <?php if($getImages->num_rows > 0){ ?>
-                                            <input type="file" name="product_images[]" accept="image/*">
+                                            <input type="file" name="product_images[]" onchange="imgPreview(this);" accept="image/*">
                                         <?php } else { ?>
-                                            <input type="file" name="product_images[]" accept="image/*" required >
+                                            <input type="file" name="product_images[]" onchange="imgPreview(this);" accept="image/*" required >
                                         <?php } ?>
-                                        <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                        <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a>
+                                       </div><br/> 
                                     </div>
                                 </div>
 
@@ -175,9 +175,9 @@ if (!isset($_POST['submit']))  {
                                     <select name="status" required>
                                         <option value="" disabled selected>Choose your status</option>
                                         <option value="0" <?php if($getAllProductsData['status'] == 0) { echo "Selected"; }?>>Active</option>
-                                        <option value="1" <?php if($getAllProductsData['status'] == 1) { echo "Selected"; }?>>In Active</option>                                        
-                                    </select>                                    
-                                </div>                                
+                                        <option value="1" <?php if($getAllProductsData['status'] == 1) { echo "Selected"; }?>>In Active</option>
+                                    </select>
+                                </div>
                                 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">
@@ -215,7 +215,7 @@ function addInput(divName) {
     newDiv.className = 'new_appen_class';
     var selectHTML = "";    
     selectHTML="<div class='input-field col s4'><select required name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' required name='price[]' ><label for='price'>Price</label></div>";
+    var newTextBox = "<div class='input-field col s4'><input type='text' onkeypress='return isNumberKey(event)' onclick='addInput('dynamicInput');' required name='price[]' ><label for='price'>Price</label></div>";
     removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
     for(i = 0; i < choices.length; i = i + 1) {
         selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
@@ -230,8 +230,32 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).parent().parent().remove();
     })
+    //Script for Multilpe Images Preview
+    var abc = 0;
+    $('#add_more').click(function () {
+        $(this).before("<div><input type='file' id='file' name='product_images[]' accept='image/*' required><a href='#' class='remove_field'>Remove</a> </div>");
+    });
+    $('body').on('change', '#file', function () {
+        if (this.files && this.files[0])
+        {
+            abc += 1; //increementing global variable by 1
+            var z = abc - 1;
+            var x = $(this).parent().find('#previewimg' + z).remove();
+            $(this).before("<div><img id='previewimg" + abc + "' src='' width='150' height='150'/></div>");
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+        //image preview
+    function imageIsLoaded(e) {
+        $('#previewimg' + abc).attr('src', e.target.result);
+    };
+    $(this).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
 });
-
+//Multilpe Images Preview script end here
 </script>
 
 <script type="text/javascript">
@@ -239,43 +263,28 @@ $(function(){
     $(document).on('click','.ajax_img_del',function(){
         var del_id= $(this).attr('id');
         var $ele = $(this).parent().parent();
+        var del_confirm = confirm("Are you sure you want to delete?");
+        if(del_confirm == true){
         $.ajax({
             type:'POST',
             url:'delete_image.php',
             data:{'del_id':del_id},
-            success: function(data){               
+            success: function(data){
                  if(data=="YES"){
-                    alert("Deleted Scuccesfully");
                     location.reload();
                  }else{
                     alert("Deleted Failed");  
                  }
              }
-
-            });
         });
+        }else{
+            location.reload();
+         }
+    });
 });
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-    
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-   
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-        }
-    });
-   
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
-});
+
 //Script allowed only numeric value
 function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode

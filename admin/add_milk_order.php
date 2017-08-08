@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="price_ltr" type="text" class="validate" name="price_ltr" required>
+                                    <input id="price_ltr" type="text" class="validate" name="price_ltr" onkeypress="return isNumberKey(event)" required>
                                     <label for="price_ltr">Price per Ltr</label>
                                 </div>
 
@@ -118,4 +118,11 @@ $('#price_ltr').on('keyup', function(){
         $('#total_ltr_price').val('');
     }
 });
+//Script allowed only numeric value
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
 </script>

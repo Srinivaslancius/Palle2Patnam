@@ -65,9 +65,9 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$pdf->setLanguageArray($l);
 }
 
-$servername = "localhost";
+$servername = "192.168.0.112";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "palle2patnam";
 
 $price = 0;

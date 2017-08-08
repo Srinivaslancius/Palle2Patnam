@@ -9,7 +9,7 @@ $id = $_GET['id'];
     //Save data into database
     $vendor_id = $_POST['vendor_id'];
     $milk_in_ltrs  = $_POST['milk_in_ltrs'];
-    $created_date = date("Y-m-d h:i:s");
+    $created_date = date("Y-m-d");
   
         $sql = "UPDATE vendor_milk_assign SET vendor_id = '$vendor_id',milk_in_ltrs = '$milk_in_ltrs',created_date = '$created_date' WHERE id='$id'";
         if($conn->query($sql) === TRUE) {

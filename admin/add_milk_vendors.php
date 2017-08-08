@@ -8,7 +8,7 @@ if (!isset($_POST['submit']))  {
     //Save data into database
     $vendor_id = $_POST['vendor_id'];
     $milk_in_ltrs  = $_POST['milk_in_ltrs'];
-    $created_date = date("Y-m-d h:i:s");
+    $created_date = date("Y-m-d");
   
         $sql = "INSERT INTO vendor_milk_assign (`vendor_id`,`milk_in_ltrs`,`created_date`) VALUES ('$vendor_id','$milk_in_ltrs', '$created_date')";
         if($conn->query($sql) === TRUE) {

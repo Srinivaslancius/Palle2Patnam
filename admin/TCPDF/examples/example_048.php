@@ -126,10 +126,11 @@ $pdf->SetFont('helvetica', '', 8);
    $tbl = '<table cellspacing="0" cellpadding="2" border="1">
     <tr style="background-color:#FFFF00;color:#0000FF;">
         <td align="center"><strong>Package Name</strong></td>
-        <td align="center"><strong>Total Ltrs</strong></td>    
+        <td align="center"><strong>Total Ltrs</strong></td>
+        <td align="center"><strong>Ltr Price</strong></td>
     </tr>';
     
-    $tbl .='<tr style="background-color:#e0e0e0;"><td align="center">Monthly -  Milk </td><td align="center"> '.$TotalLtrs.' </td></tr>';
+    $tbl .='<tr style="background-color:#e0e0e0;"><td align="center">Monthly -  Milk </td><td align="center"> '.$TotalLtrs.' </td><td align="center"> '.$priceinLtr.' </td></tr>';
     $tbl .= '</table>';
 
 $cntExtraLtrs = mysqli_num_rows($resultset);

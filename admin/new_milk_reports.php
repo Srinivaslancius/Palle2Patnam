@@ -115,11 +115,21 @@ tr:nth-child(even) {
     <!-- <td><?php echo $row['total_ltr']; ?></td> -->
     <td><?php echo $row['start_date']; ?></td>
     <td><?php echo $row['end_date']; ?></td>
-    <td><a href="">View</a> &nbsp;&nbsp; <a href="TCPDF/examples/example_048.php?uid=<?php echo $row['user_id']; ?>" target="_blank">Print</a></td>
+    <td><a href="TCPDF/examples/example_048.php?uid=<?php echo $row['user_id']; ?>" target="_blank">Print</a></td>
   </tr>
  <?php } ?>
 </table>
-<a href="TCPDF/examples/monthly_pdf_reports.php?user_ids=<?php echo $user_id; ?>" target="_blank">Generate Reports</a>
+<?php 
+if(isset($_REQUEST['start_date']) && $_REQUEST['start_date']!='' && isset($_REQUEST['end_date']) && $_REQUEST['end_date']!='') {
+  $start_date = $_REQUEST['start_date'];
+  $end_date = $_REQUEST['end_date'];
+} else {
+  $start_date = '';
+  $end_date = '';
+}
+
+?>
+<a href="TCPDF/examples/monthly_pdf_reports.php?start_date=<?php echo $start_date; ?>&end_date=<?php echo $end_date; ?>" target="_blank">Generate Reports</a>
 </body>
 </html>
   <script>

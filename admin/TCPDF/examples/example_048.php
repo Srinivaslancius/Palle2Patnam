@@ -1,5 +1,5 @@
 <?php
-error_reporting(1);
+error_reporting(0);
 //============================================================+
 // File name   : example_048.php
 // Begin       : 2009-03-20
@@ -65,27 +65,29 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$pdf->setLanguageArray($l);
 }
 
-$servername = "192.168.0.112";
-$username = "root";
-$password = "root";
-$dbname = "palle2patnam";
-
 $price = 0;
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
+include_once('../../includes/config.php');
 include_once('../../includes/functions.php');
 $uid = $_GET['uid'];
 
 $sql = "SELECT milk_orders.id,milk_orders.total_ltr as total_ltrs,milk_orders.user_id, extra_milk_orders.extra_ltr, extra_milk_orders.order_date, milk_orders.start_date, milk_orders.end_date,users.user_name,users.id FROM milk_orders LEFT JOIN extra_milk_orders ON milk_orders.user_id=extra_milk_orders.user_id LEFT JOIN users ON users.id=milk_orders.user_id WHERE milk_orders.user_id = $uid AND DATE_FORMAT(order_date,'%Y-%m-%d') between milk_orders.start_date AND milk_orders.end_date ";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+if($conn->query($sql)){
+    $resultset = $conn->query($sql);
+}else{
+    die('There was an error running the query [' . $conn->error . ']');
+}
+
 
 $sql1 = "SELECT milk_orders.id,milk_orders.total_ltr as total_ltrs,milk_orders.user_id, cancel_milk_orders.cancel_ltr, cancel_milk_orders.cancel_date, milk_orders.start_date, milk_orders.end_date,users.user_name,users.id FROM milk_orders LEFT JOIN cancel_milk_orders ON milk_orders.user_id=cancel_milk_orders.user_id LEFT JOIN users ON users.id=milk_orders.user_id WHERE milk_orders.user_id = $uid AND DATE_FORMAT(cancel_date,'%Y-%m-%d') between milk_orders.start_date AND milk_orders.end_date ";
-$resultset1 = mysqli_query($conn, $sql1) or die("database error:". mysqli_error($conn));
+if($conn->query($sql1)){
+    $resultset1 = $conn->query($sql1);
+}else{
+    die('There was an error running the query [' . $conn->error . ']');
+}
 
 $getTotalLtrs = "SELECT total_ltr,price_ltr from milk_orders WHERE milk_orders.user_id = $uid AND DATE_FORMAT(start_date,'%Y-%m-%d') between milk_orders.start_date AND milk_orders.end_date";
-$totalltr = mysqli_query($conn, $getTotalLtrs);
-$gettotal = mysqli_fetch_array($totalltr);
+$totalltr = $conn->query($getTotalLtrs);
+$gettotal = $totalltr->fetch_array();
 $TotalLtrs = $gettotal[0];
 $priceinLtr = $gettotal[1];
 
@@ -132,9 +134,8 @@ $pdf->SetFont('helvetica', '', 8);
     
     $tbl .='<tr style="background-color:#e0e0e0;"><td align="center">Monthly -  Milk </td><td align="center"> '.$TotalLtrs.' </td><td align="center"> '.$priceinLtr.' </td></tr>';
     $tbl .= '</table>';
-
-$cntExtraLtrs = mysqli_num_rows($resultset);
-$cntCancelLtrs = mysqli_num_rows($resultset1);
+$cntExtraLtrs = $resultset->num_rows;
+$cntCancelLtrs = $resultset1->num_rows;
 
 if($cntExtraLtrs!=0) {
     $tbl .= '<table cellspacing="0" cellpadding="2" border="1">
@@ -144,7 +145,7 @@ if($cntExtraLtrs!=0) {
     </tr>';
     $total = 0;
     
-    while ($milkOrderData= mysqli_fetch_array($resultset)){
+    while ($milkOrderData= $resultset->fetch_array()){
       $total += $milkOrderData['extra_ltr'];
       $tbl .='<tr>                
                 <td  align="center">'.$milkOrderData['order_date'].'</td>
@@ -163,7 +164,7 @@ if($cntCancelLtrs!=0) {
     </tr>';
     $total1 = 0;
     
-    while ($milkCancelData= mysqli_fetch_array($resultset1)){
+    while ($milkCancelData= $resultset1->fetch_array()){
       $total1 += $milkCancelData['cancel_ltr'];
       $tbl .='<tr>                
                 <td  align="center">'.$milkCancelData['cancel_date'].'</td>

@@ -65,6 +65,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$pdf->setLanguageArray($l);
 }
 
+
 $price = 0;
 include_once('../../includes/config.php');
 include_once('../../includes/functions.php');

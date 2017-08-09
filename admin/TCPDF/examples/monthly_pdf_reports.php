@@ -44,14 +44,13 @@ class MYPDF extends TCPDF {
         $from_change_format =  date("Y-m-d", strtotime($_GET['start_date']));
         $to_change_format =  date("Y-m-d", strtotime($_GET['end_date']));
         if($from_change_format!='1970-01-01' && $to_change_format!='1970-01-01') {
-        $getSelData = "SELECT users.user_name,users.street_name,users.user_mobile,milk_orders.start_date,milk_orders.end_date,milk_orders.total_ltr AS actual_ltrs ,milk_orders.price_ltr,SUM(extra_milk_orders.extra_ltr) AS extra_ltrs,SUM(cancel_milk_orders.cancel_ltr) AS cancel_ltrs,milk_orders.total_ltr + SUM(extra_milk_orders.extra_ltr)-SUM(cancel_milk_orders.cancel_ltr) AS grand_total_milk ,users.id FROM users LEFT JOIN extra_milk_orders
-          ON users.id = extra_milk_orders.user_id LEFT JOIN cancel_milk_orders
-          ON users.id = cancel_milk_orders.user_id LEFT JOIN milk_orders ON users.id = milk_orders.user_id WHERE DATE_FORMAT(milk_orders.start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' group by users.id";
+
+        $getSelData = "SELECT users.user_name,users.street_name,users.user_mobile,milk_orders.start_date,milk_orders.end_date,IFNULL(milk_orders.total_ltr,0) as actual_ltrs,IFNULL(milk_orders.price_ltr,0)as price_ltr,sum(IFNULL(extra_milk_orders.extra_ltr,0)) as extra_ltrs,sum(IFNULL(cancel_milk_orders.cancel_ltr,0)) as cancel_ltrs,milk_orders.total_ltr+ sum(IFNULL(extra_milk_orders.extra_ltr,0)) - sum(IFNULL(cancel_milk_orders.cancel_ltr,0)) AS grand_total_milk,milk_orders.price_ltr *( milk_orders.total_ltr+ sum(IFNULL(extra_milk_orders.extra_ltr,0)) - sum(IFNULL(cancel_milk_orders.cancel_ltr,0) ))as total_order_price,users.id FROM  milk_orders LEFT JOIN  users ON users.id = milk_orders.user_id LEFT JOIN extra_milk_orders ON milk_orders.user_id = extra_milk_orders.user_id LEFT JOIN cancel_milk_orders ON milk_orders.user_id= cancel_milk_orders.user_id WHERE DATE_FORMAT(milk_orders.start_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' GROUP BY users.id";        
 
         } else {
-            $getSelData = "SELECT users.user_name,users.street_name,users.user_mobile,milk_orders.start_date,milk_orders.end_date,milk_orders.total_ltr AS actual_ltrs ,milk_orders.price_ltr,SUM(extra_milk_orders.extra_ltr) AS extra_ltrs,SUM(cancel_milk_orders.cancel_ltr) AS cancel_ltrs,milk_orders.total_ltr + SUM(extra_milk_orders.extra_ltr)-SUM(cancel_milk_orders.cancel_ltr) AS grand_total_milk ,users.id FROM users LEFT JOIN extra_milk_orders
-          ON users.id = extra_milk_orders.user_id LEFT JOIN cancel_milk_orders
-          ON users.id = cancel_milk_orders.user_id LEFT JOIN milk_orders ON users.id = milk_orders.user_id group by users.id";
+
+        $getSelData = "SELECT users.user_name,users.street_name,users.user_mobile,milk_orders.start_date,milk_orders.end_date,IFNULL(milk_orders.total_ltr,0) as actual_ltrs,IFNULL(milk_orders.price_ltr,0)as price_ltr,sum(IFNULL(extra_milk_orders.extra_ltr,0)) as extra_ltrs,sum(IFNULL(cancel_milk_orders.cancel_ltr,0)) as cancel_ltrs,milk_orders.total_ltr+ sum(IFNULL(extra_milk_orders.extra_ltr,0)) - sum(IFNULL(cancel_milk_orders.cancel_ltr,0)) AS grand_total_milk,milk_orders.price_ltr *( milk_orders.total_ltr+ sum(IFNULL(extra_milk_orders.extra_ltr,0)) - sum(IFNULL(cancel_milk_orders.cancel_ltr,0) ))as total_order_price,users.id FROM  milk_orders LEFT JOIN  users ON users.id = milk_orders.user_id LEFT JOIN extra_milk_orders ON milk_orders.user_id = extra_milk_orders.user_id LEFT JOIN cancel_milk_orders ON milk_orders.user_id= cancel_milk_orders.user_id GROUP BY users.id";
+           
         }
         $resultset = mysqli_query($conn, $getSelData) or die("database error:". mysqli_error($conn));
         //$lines = file($resultset);
@@ -78,7 +77,7 @@ class MYPDF extends TCPDF {
         $this->SetLineWidth(0.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(20, 20, 18, 18, 18, 18, 18, 18, 20, 13);
+        $w = array(20, 20, 18, 17, 17, 17, 15, 18, 20, 16, 20);
         $num_headers = count($header);
         for($i = 0; $i < $num_headers; ++$i) {
             $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
@@ -101,6 +100,7 @@ class MYPDF extends TCPDF {
             $this->Cell($w[7], 6, $row[7], 'LR', 0, 'L', $fill);
             $this->Cell($w[8], 6, $row[8], 'LR', 0, 'L', $fill);
             $this->Cell($w[9], 6, $row[9], 'LR', 0, 'L', $fill);
+            $this->Cell($w[10], 6, $row[10], 'LR', 0, 'L', $fill);
             $this->Ln();
             $fill=!$fill;
         }
@@ -154,7 +154,7 @@ $pdf->SetFont('helvetica', '', 8);
 $pdf->AddPage();
 
 // column titles
-$header = array('User Name', 'Address', 'Mobile', 'Start Date', 'End Date', 'Actual Ltrs', 'Ltr Price', 'Extra Ltrs', 'Cancelled Ltrs', 'Total');
+$header = array('User Name', 'Address', 'Mobile', 'Start Date', 'End Date', 'Actual Ltrs', 'Ltr Price', 'Extra Ltrs', 'Cancelled Ltrs','Total Ltrs', 'Grand total');
 
 // data loading
 $data = $pdf->LoadData();

@@ -22,5 +22,5 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$base_url = "http://localhost:8012/palle2patnam/";
+$base_url = "http://localhost/palle2patnam/";
 ?>

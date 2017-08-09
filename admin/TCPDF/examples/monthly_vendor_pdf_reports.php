@@ -45,9 +45,9 @@ class MYPDF extends TCPDF {
         $from_change_format =  date("Y-m-d", strtotime($_GET['start_date']));
         $to_change_format =  date("Y-m-d", strtotime($_GET['end_date']));
         if($from_change_format!='1970-01-01' && $to_change_format!='1970-01-01') {
-            $getSelData = "SELECT id,milk_in_ltrs,SUM(milk_in_ltrs) AS total_milk_vendor_ltrs from `vendor_milk_assign` WHERE DATE_FORMAT(created_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' ORDER BY id DESC";
+            $getSelData = "SELECT Query";
         } else {
-            echo $getSelData = "SELECT id,milk_in_ltrs,SUM(milk_in_ltrs) AS total_milk_vendor_ltrs from `vendor_milk_assign` ORDER BY id DESC ";
+            echo $getSelData = "SELECT Query ";
         }        
 
         $resultset = mysqli_query($conn, $getSelData) or die("database error:". mysqli_error($conn));

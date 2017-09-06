@@ -23,15 +23,11 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "palle2patnam";
 
 $price = 0;
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+
 // Include the main TCPDF library (search for installation path).
+include_once('../../includes/config.php');
 require_once('tcpdf_include.php');
 
 // extend TCPF with custom functions
@@ -52,11 +48,16 @@ class MYPDF extends TCPDF {
         $getSelData = "SELECT users.user_name,users.street_name,users.user_mobile,milk_orders.start_date,milk_orders.end_date,IFNULL(milk_orders.total_ltr,0) as actual_ltrs,IFNULL(milk_orders.price_ltr,0)as price_ltr,sum(IFNULL(extra_milk_orders.extra_ltr,0)) as extra_ltrs,sum(IFNULL(cancel_milk_orders.cancel_ltr,0)) as cancel_ltrs,milk_orders.total_ltr+ sum(IFNULL(extra_milk_orders.extra_ltr,0)) - sum(IFNULL(cancel_milk_orders.cancel_ltr,0)) AS grand_total_milk,milk_orders.price_ltr *( milk_orders.total_ltr+ sum(IFNULL(extra_milk_orders.extra_ltr,0)) - sum(IFNULL(cancel_milk_orders.cancel_ltr,0) ))as total_order_price,users.id FROM  milk_orders LEFT JOIN  users ON users.id = milk_orders.user_id LEFT JOIN extra_milk_orders ON milk_orders.user_id = extra_milk_orders.user_id LEFT JOIN cancel_milk_orders ON milk_orders.user_id= cancel_milk_orders.user_id GROUP BY users.id";
            
         }
-        $resultset = mysqli_query($conn, $getSelData) or die("database error:". mysqli_error($conn));
+        if($conn->query($getSelData)){
+        $resultset = $conn->query($getSelData);
+        }else{
+        die('There was an error running the query [' . $conn->error . ']');
+        }
+        //$resultset = mysqli_query($conn, $getSelData) or die("database error:". mysqli_error($conn));
         //$lines = file($resultset);
         //echo "<pre>"; print_r($resultset); die;
         $data = array();
-        while ($milkOrderData= mysqli_fetch_array($resultset)){
+        while ($milkOrderData= $resultset->fetch_array()){
             //echo "<pre>"; print_r($milkOrderData);    
             //$values = implode(';', $milkOrderData);
             //array_push($data, $values);

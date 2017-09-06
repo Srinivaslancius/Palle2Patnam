@@ -23,15 +23,12 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "palle2patnam";
 
 $price = 0;
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+
 // Include the main TCPDF library (search for installation path).
+include_once('../../includes/config.php');
 require_once('tcpdf_include.php');
 include_once('../../includes/functions.php');
 
@@ -45,16 +42,21 @@ class MYPDF extends TCPDF {
         $from_change_format =  date("Y-m-d", strtotime($_GET['start_date']));
         $to_change_format =  date("Y-m-d", strtotime($_GET['end_date']));
         if($from_change_format!='1970-01-01' && $to_change_format!='1970-01-01') {
-            $getSelData = "SELECT Query";
+            $getSelData = "SELECT vendors.id,vendors.vendor_name, sum(vendor_milk_assign.milk_in_ltrs) FROM vendor_milk_assign LEFT JOIN vendors ON vendor_milk_assign.vendor_id=vendors.id WHERE DATE_FORMAT(vendor_milk_assign.created_date,'%Y-%m-%d') between '$from_change_format' AND '$to_change_format' GROUP BY vendor_milk_assign.vendor_id";
         } else {
-            echo $getSelData = "SELECT Query ";
+             $getSelData = "SELECT vendors.id,vendors.vendor_name, sum(vendor_milk_assign.milk_in_ltrs) FROM vendor_milk_assign LEFT JOIN vendors ON vendor_milk_assign.vendor_id=vendors.id GROUP BY vendor_milk_assign.vendor_id";
         }        
 
-        $resultset = mysqli_query($conn, $getSelData) or die("database error:". mysqli_error($conn));
+        if($conn->query($getSelData)){
+            $resultset = $conn->query($getSelData);
+        }else{
+            die('There was an error running the query [' . $conn->error . ']');
+        }
+     
         //$lines = file($resultset);
         //echo "<pre>"; print_r($resultset); die;
         $data = array();
-        while ($milkOrderData= mysqli_fetch_array($resultset)){
+        while ($milkOrderData = $resultset->fetch_array()){
             //echo "<pre>"; print_r($milkOrderData);                
             $data[] = $milkOrderData;
         }       

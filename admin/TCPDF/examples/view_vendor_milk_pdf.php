@@ -65,20 +65,17 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$pdf->setLanguageArray($l);
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "palle2patnam";
-
 $price = 0;
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
+include_once('../../includes/config.php');
 include_once('../../includes/functions.php');
 $uid = $_GET['uid'];
 
 $sql = "select *,SUM(milk_in_ltrs) AS total_milk_vendor_ltrs from `vendor_milk_assign` WHERE vendor_id = '$uid' ";
-$resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
+if($conn->query($sql)){
+    $resultset = $conn->query($sql);
+}else{
+    die('There was an error running the query [' . $conn->error . ']');
+}
 $row = $resultset->fetch_assoc();
 $getUserNameName = getIndividualDetails($uid,'vendors','id'); 
 

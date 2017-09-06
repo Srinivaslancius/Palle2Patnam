@@ -10,14 +10,10 @@ if (!isset($_POST['submit']))  {
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-    $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
-    $about = $_POST['about'];
-    $availability_id = $_POST['availability_id'];
     $status = $_POST['status'];
     //save product images into product_images table    
-    
-    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id', key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id', product_info = '$product_info', status = '$status' WHERE id = '$id'"; 
     
     if ($conn->query($sql1) === TRUE) {
     echo "Record updated successfully";
@@ -116,37 +112,12 @@ if (!isset($_POST['submit']))  {
                                        <a href="javascript:void(0);"  ><img src="add-icon.png" onkeypress="return isNumberKey(event)" onclick="addInput('dynamicInput');" /></a>
                                     </div>
                                     <div id="dynamicInput" class="input-field col s12"></div>
-                                
-
-                                <div class="input-field col s12">
-                                    <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
-                                    <div class="col-lg-9">
-                                        <textarea id="key_features" name="key_features" required value="<?php echo $getAllProductsData['key_features']; ?>"><?php echo $getAllProductsData['key_features']; ?></textarea>
-                                    </div>
-                                </div>
-
                                 <div class="input-field col s12">
                                     <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                     <div class="col-lg-9">
                                         <textarea name="product_info"required id="product_info"><?php echo $getAllProductsData['product_info']; ?></textarea>
                                     </div>
                                 </div>  
-
-                                <div class="input-field col s12">
-                                    <span for="keyfet" class="col-lg-3 col-sm-3 control-label">About</span> <br /><br />
-                                    <div class="col-lg-9">
-                                        <textarea name="about" required id="about"><?php echo $getAllProductsData['about']; ?></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="input-field col s12">
-                                    <select name="availability_id" required>
-                                        <option value="" disabled selected>Avalability</option>
-                                        <option value="0" <?php if($getAllProductsData['availability_id'] == 0) { echo "Selected=Selected"; }?>>In Stock</option>
-                                        <option value="1" <?php if($getAllProductsData['availability_id'] == 1) { echo "Selected=Selected"; }?>>Out Of Stock</option>                                        
-                                    </select> 
-                                </div>
-
                                  <div class="input-field col s12">
                                     <?php                                                                 
                                     $sql = "SELECT id,product_image FROM product_images where product_id = $id";

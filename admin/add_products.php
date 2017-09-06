@@ -8,16 +8,13 @@ if (!isset($_POST['submit']))  {
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-    $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
-    $about = $_POST['about'];
-    $availability_id = $_POST['availability_id'];
     $status = $_POST['status'];
     $created_at = date("Y-m-d h:i:s");
     $created_by = $_SESSION['admin_user_id'];
     //save product images into product_images table    
     
-     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `key_features`,`product_info`,`about`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$key_features','$product_info','$about','$availability_id','$status','$created_by','$created_at')";
+     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `product_info`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$product_info', '$status','$created_by','$created_at')";
      $result1 = $conn->query($sql1);
      $last_id = $conn->insert_id;
 
@@ -97,36 +94,12 @@ if (!isset($_POST['submit']))  {
                                     </div>
                                     <div id="dynamicInput" class="input-field col s12"></div>
                                 </div>
-                                
                                 <div class="input-field col s12">
-                                        <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
-                                        <div class="col-lg-9">
-                                            <textarea id="key_features" name="key_features" required></textarea>
-                                        </div>
-                                </div>
-                                        
-                                <div class="input-field col s12">
-                                        <span for="name" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
-                                        <div class="col-lg-9">
-                                            <textarea id="product_info" name="product_info" required></textarea>
-                                        </div>
+                                    <span for="name" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
+                                    <div class="col-lg-9">
+                                        <textarea id="product_info" name="product_info" required></textarea>
+                                    </div>
                                 </div>  
-                                
-                                <div class="input-field col s12">
-                                        <span for="name" class="col-lg-3 col-sm-3 control-label">About</span> <br /><br />
-                                        <div class="col-lg-9">
-                                            <textarea id="about" name="about" required></textarea>
-                                        </div>
-                                </div>
-                                    
-                                <div class="input-field col s12">
-                                    <select name="availability_id" required>
-                                        <option value="" disabled selected>Avalability</option>
-                                        <option value="0">In Stock</option>
-                                        <option value="1">Out Of Stock</option>
-                                    </select> 
-                                </div>
-
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
                                     <div class="input_fields_wrap">
